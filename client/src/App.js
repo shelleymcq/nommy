@@ -12,6 +12,8 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Board from './pages/Board';
+import Item from './pages/Item'
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -55,11 +57,14 @@ function App() {
             <Route exact path="/signup">
               <Signup />
             </Route>
-            <Route exact path="/me">
+            <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/users/:id">
-              <Profile />
+            <Route exact path="/board">
+              <Board />
+            </Route>
+            <Route exact path="/item">
+              <Item />
             </Route>
           </div>
           <Footer />
