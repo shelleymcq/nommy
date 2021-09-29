@@ -31,7 +31,8 @@ const Home = () => {
           className="col-12 col-md-10 mb-3 p-3"
           style={{ border: '1px dotted #1a1a1a' }}
         >
-          {renderUsername()}
+          This is the logged in home page. Welcome, {renderUsername()}!
+          From here, you can either view your profile page, your friends' list, or log out.
         </div>
         <div className="col-12 col-md-8 mb-3">
           {renderUserList()}
