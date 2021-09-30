@@ -17,6 +17,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
-    "graphql": "^15.6.0"
+    "graphql": "^15.6.0",
+    "react-bootstrap": "^1.6.4"
   }
 }
