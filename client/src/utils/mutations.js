@@ -24,6 +24,20 @@ export const ADD_USER = gql`
   }
 `;
 
+export const ADD_SLATE = gql`
+  mutation addSlate($name: String!) {
+    addSlate(name: $name) {
+      _id
+      username
+      email
+      slates {
+        _id
+        name
+      }
+    }
+  }
+`;
+
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {

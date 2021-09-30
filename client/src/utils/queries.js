@@ -6,6 +6,20 @@ export const QUERY_USERS = gql`
       _id
       username
       email
+      slates {
+        _id
+        name
+      }
+    }
+  }
+`;
+
+
+export const QUERY_SLATES = gql`
+  query slates {
+    slates {
+      _id
+      name
     }
   }
 `;
@@ -16,6 +30,10 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      slates{
+        _id
+        name
+      }
     }
   }
 `;
@@ -26,6 +44,10 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      slates{
+        _id
+        name
+      }
     }
   }
 `;
