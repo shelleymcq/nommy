@@ -5,10 +5,16 @@ const { User, Slate, Restaurant } = require('../models');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
+      return User.find().populate('slates').populate({
+        path: 'slates',
+        populate: 'restaurants'
+      });
     },
     user: async (_, args) => {
-      return User.findOne({ _id: args.id });
+      return User.findOne({ _id: args.id }).populate('slates').populate({
+        path: 'slates',
+        populate: 'restaurants'
+      });
     },
     me: async (_, args, context) => {
       if (context.user) {
@@ -17,7 +23,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     slates: async () => {
-      return Slate.find();
+      return Slate.find().populate('restaurants');
     },
   },
 
@@ -67,12 +73,12 @@ const resolvers = {
       //}
       // throw new AuthenticationError('You need to be logged in!');
     },
-    addRestaurant: async (parent, { restaurantId, name,  categories, image, link, slateId, distance }, context) => {
+    addRestaurant: async (parent, { restaurantId, name,  category, image, link, slateId, distance }, context) => {
       if (context.user) {
         const restaurant = await Restaurant.create({
           restaurantId,
           name,
-          categories,
+          category,
           image,
           link,
           distance
@@ -86,7 +92,7 @@ const resolvers = {
             restaurants: {
               restaurantId, 
               name,  
-              categories, 
+              category, 
               image, 
               link, 
               distance 

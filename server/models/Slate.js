@@ -14,10 +14,10 @@ const slateSchema = new Schema({
       ref: 'Restaurant',
     },
   ],
-  // slateCreator: {
-  //   type: String,
-  //   required: true,
-  // }
+  slateCreator: {
+    type: String,
+    required: true,
+  }
 });
 
 const Slate = model('Slate', slateSchema);
