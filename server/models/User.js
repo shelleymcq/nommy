@@ -18,7 +18,19 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 5,
-  }
+  },
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  slates: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Slate',
+    },
+  ]
 });
 
 userSchema.pre('save', async function (next) {
