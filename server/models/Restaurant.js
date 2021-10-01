@@ -6,11 +6,9 @@ const restaurantSchema = new Schema({
     type: String,
     required: true,
   },
-  categories: [
-    {
+  category: {
       type: String,
-    },
-  ],
+  },
   image: {
     type: String,
   },

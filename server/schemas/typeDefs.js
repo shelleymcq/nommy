@@ -14,12 +14,12 @@ const typeDefs = gql`
     _id: ID
     name: String
     restaurants: [Restaurant]
-    # slateCreator: String
+    slateCreator: String
   }
 
   type Restaurant {
     restaurantId: String!
-    categories: [String]
+    category: [String]
     name: String!
     image: String
     distance: String
@@ -43,7 +43,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     
     addSlate(name: String!): User
-    addRestaurant(restaurantId: String!, categories: [String], name: String!, image: String, distance: String, link: String): Slate
+    addRestaurant(restaurantId: String!, category: String, name: String!, image: String, distance: String, link: String): Slate
   }
 `;
 
