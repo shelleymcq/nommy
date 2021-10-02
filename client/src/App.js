@@ -12,7 +12,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Board from './pages/Board';
+import Slate from './pages/Slate';
 import Item from './pages/Item'
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -65,8 +65,8 @@ function App() {
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/board">
-              <Board />
+            <Route exact path="/slate">
+              <Slate />
             </Route>
             <Route exact path="/item">
               <Item />
