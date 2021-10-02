@@ -1,5 +1,5 @@
 // Node Modules
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
@@ -8,10 +8,11 @@ import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
+import AddSlateModal from '../components/AddSlateModal/AddSlateModal';
 
 const Profile = () => {
   const { id } = useParams();
-
+  const [modalDisplay, setModalDisplay] = useState(false);
   // Get current user
   const { loading, data, error } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
@@ -54,9 +55,12 @@ const Profile = () => {
       </div>
     );
   };
+  const renderModal = () => {
+    setModalDisplay(true);
+  }
 
   const renderCurrentUserInfo = () => {
-    console.log(user.username)
+    // console.log(user.username)
     if (id) return null;
     return (
       <ul>
@@ -77,10 +81,11 @@ const Profile = () => {
           {/* {renderUserList()} */}
         </div>
           <div>
-            <button className="btn btn-lg btn-light m-2">
+            <button className="btn btn-lg btn-light m-2" onClick={() => renderModal()}>
               Add Slate
             </button>
           </div>
+          {modalDisplay ? <p>This is our modal</p> : null}
       </div>
     </div>
   );
