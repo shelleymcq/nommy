@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from '../components/Modal/Modal'
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -74,6 +75,11 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+                <button>
+                    <Modal>Choose Avatar</Modal>
+                  </button>
+                  <br />
+                  <br />
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}
