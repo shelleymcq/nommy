@@ -75,9 +75,7 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button>
-                    <Modal>Choose Avatar</Modal>
-                  </button>
+                <Modal>Choose Avatar</Modal>
                   <br />
                   <br />
                 <button
