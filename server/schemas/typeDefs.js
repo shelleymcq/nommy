@@ -35,6 +35,7 @@ const typeDefs = gql`
     users: [User]
     user(id: ID!): User
     userByName(username: String!): User
+    userByEmail(email: String!): User
     me: User
     slates: [Slate]
     slate(id: ID!): Slate
