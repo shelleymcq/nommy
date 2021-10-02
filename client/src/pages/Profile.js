@@ -2,6 +2,7 @@
 import React from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+
 // Utilities
 import Auth from '../utils/auth';
 import { QUERY_USERS, QUERY_USER, QUERY_ME } from '../utils/queries';
@@ -25,8 +26,9 @@ const Profile = () => {
   if (error) console.log(error);
 
   // redirect to personal profile page if username is yours
+  // NOT SURE WHAT THIS IS DOING. Button in Header -> index.js folder redirects us here
   if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
-    return <Redirect to="/me" />;
+    return <Redirect to="/profile" />;
   }
 
   if (loading) {
@@ -54,6 +56,7 @@ const Profile = () => {
   };
 
   const renderCurrentUserInfo = () => {
+    console.log(user.username)
     if (id) return null;
     return (
       <ul>
@@ -69,8 +72,15 @@ const Profile = () => {
         <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
           Viewing {id ? `${user.username}'s` : 'your'} profile.
         </h2>
-        {renderCurrentUserInfo()}
-        {renderUserList()}
+        <div>
+          {renderCurrentUserInfo()}
+          {/* {renderUserList()} */}
+        </div>
+          <div>
+            <button className="btn btn-lg btn-light m-2">
+              Add Slate
+            </button>
+          </div>
       </div>
     </div>
   );
