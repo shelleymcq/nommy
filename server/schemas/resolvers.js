@@ -8,13 +8,19 @@ const resolvers = {
       return User.find().populate('slates').populate({
         path: 'slates',
         populate: 'restaurants'
-      });
+      }).populate('friends');
     },
     user: async (_, args) => {
       return User.findOne({ _id: args.id }).populate('slates').populate({
         path: 'slates',
         populate: 'restaurants'
-      });
+      }).populate('friends');
+    },
+    userByName: async (_, args) => {
+      return User.findOne({ username: args.username }).populate('slates').populate({
+        path: 'slates',
+        populate: 'restaurants'
+      }).populate('friends');
     },
     me: async (_, args, context) => {
       if (context.user) {
@@ -25,6 +31,9 @@ const resolvers = {
     slates: async () => {
       return Slate.find().populate('restaurants');
     },
+    slate: async (_, args) => {
+      return Slate.findOne({ _id: args.id }).populate('restaurants');
+    }
   },
 
   Mutation: {
@@ -61,7 +70,8 @@ const resolvers = {
 
         const updatedUser = await User.findOneAndUpdate(
           // { _id: context.user._id },
-          { _id: "6154f276e6bd495ea0db08ee"},
+          // using an ID from my seeds for testing purposes on GraphQL
+          { _id: "6157e2ac9a561b7ec8a741bb"},
           { $addToSet: { slates: {...slate} } },
           {
             new: true,
@@ -73,8 +83,9 @@ const resolvers = {
       //}
       // throw new AuthenticationError('You need to be logged in!');
     },
-    addRestaurant: async (parent, { restaurantId, name,  category, image, link, slateId, distance }, context) => {
-      if (context.user) {
+    addRestaurant: async (parent, { restaurantId, name,  category, image, link, distance, slateId }, context) => {
+      // if (context.user) {
+        // CREATE THE RESTAURANT IN DATABASE FROM THE API DATA
         const restaurant = await Restaurant.create({
           restaurantId,
           name,
@@ -84,25 +95,117 @@ const resolvers = {
           distance
         });
 
-        console.log("restaurant to create:", restaurant)
+        // console.log("restaurant to create:", restaurant)
 
-        const slate = await Slate.findOneAndUpdate(
-          { _id: slateId },
-          { $addToSet: { 
-            restaurants: {
-              restaurantId, 
-              name,  
-              category, 
-              image, 
-              link, 
-              distance 
-            } 
-          } }
-        );
-        console.log("updated slate:", slate)
-        return slate;
-      }
-      throw new AuthenticationError('You need to be logged in!');
+        // FIND THE SLATE AND ADD THE RESTAURANT TO IT
+        const updatedSlate = await Slate.findOneAndUpdate(
+          { _id: slateId},
+          { $addToSet: { restaurants: {...restaurant} } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        ).populate('restaurants');
+        // console.log("updatedSlate:",updatedSlate)
+        // RETURN THE UPDATED SLATE WITH RESTAURANT ADDED
+        return updatedSlate;
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
+    },
+    // Make it so a logged in user can only remove a book from their own profile
+    removeRestaurant: async (parent, { restaurantId, slateId }, context) => {
+      // if (context.user) {
+        // REMOVE THE SELECTED RESTAURANT FROM THE DATABASE
+        const removedRestaurant = await Restaurant.findOneAndDelete(
+          { restaurantId }
+        )
+        // console.log("removed restaurant:", removedRestaurant)
+        
+        // RETURN THE UPDATED SLATE
+        const updatedSlate = await Slate.findOne({_id: slateId}).populate('restaurants');
+          
+        return updatedSlate;
+      // }
+      // THROW ERROR IF USER NOT LOGGED IN
+      // throw new AuthenticationError('You need to be logged in!');
+    },
+    removeSlate: async (parent, { _id }, context) => {
+      // if (context.user) {
+        // REMOVE THE SELECTED RESTAURANT FROM THE DATABASE
+        const removedSlate = await Slate.findOneAndDelete(
+          { _id }
+        )
+        console.log("removed slate:", removedSlate)
+        
+        // RETURN THE UPDATED SLATE
+        const updatedUser = await User.findOne(
+          // { _id: context.user._id },
+          // using an ID from my seeds for testing purposes on GraphQL
+          { _id: "6157e2ac9a561b7ec8a741bb"}
+          ).populate('slates')
+          .populate({
+            path: 'slates',
+            populate: 'restaurants'
+          });
+          
+        return updatedUser;
+      // }
+      // THROW ERROR IF USER NOT LOGGED IN
+      // throw new AuthenticationError('You need to be logged in!');
+    },
+    addFriend: async (parent, { _id }, context) => {
+      //if (context.user) {
+        const friend = await User.findOne({
+          _id
+        });
+
+        console.log("new friend:", friend)
+        console.log("new friend:", friend.username)
+
+        const updatedUser = await User.findOneAndUpdate(
+          // { _id: context.user._id },
+          // using an ID from my seeds for testing purposes on GraphQL
+          { _id: "6157e2ac9a561b7ec8a741bb"},
+          { $addToSet: { friends: {...friend} } },
+          {
+            new: true,
+            runValidators: true,
+            // populate: { path: 'users' }
+          }
+        ).populate('friends');
+        // console.log("updatedUser:",updatedUser)
+        return updatedUser;
+      //}
+      // throw new AuthenticationError('You need to be logged in!');
+    },
+    removeFriend: async (parent, { _id }, context) => {
+      // if (context.user) {
+        const friend = await User.findOne({ _id });
+
+        // console.log("friend to be removed:", friend)
+        
+        // RETURN THE UPDATED SLATE
+        const updatedUser = await User.findOneAndUpdate(
+          // { _id: context.user._id },
+          // using an ID from my seeds for testing purposes on GraphQL
+          { _id: "6157e2ac9a561b7ec8a741bb"},
+          { $pull: { friends: friend._id } },
+          {
+            new: true,
+            runValidators: true,
+            // populate: { path: 'users' }
+          }
+          ).populate('slates')
+          .populate({
+            path: 'slates',
+            populate: 'restaurants'
+          })
+          .populate('friends');
+          
+        return updatedUser;
+      // }
+      // THROW ERROR IF USER NOT LOGGED IN
+      // throw new AuthenticationError('You need to be logged in!');
     },
   }
 };
