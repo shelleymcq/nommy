@@ -19,7 +19,7 @@ const typeDefs = gql`
 
   type Restaurant {
     restaurantId: String!
-    category: [String]
+    category: String
     name: String!
     image: String
     distance: String
@@ -34,8 +34,11 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(id: ID!): User
+    userByName(username: String!): User
+    userByEmail(email: String!): User
     me: User
     slates: [Slate]
+    slate(id: ID!): Slate
   }
 
   type Mutation {
@@ -43,7 +46,12 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     
     addSlate(name: String!): User
-    addRestaurant(restaurantId: String!, category: String, name: String!, image: String, distance: String, link: String): Slate
+    addRestaurant(restaurantId: String!, category: String, name: String!, image: String, distance: String, link: String, slateId: String): Slate
+    addFriend(_id: String!): User
+
+    removeRestaurant(restaurantId: String!, slateId: String): Slate
+    removeSlate(_id: String!): User
+    removeFriend(_id: String!): User
   }
 `;
 

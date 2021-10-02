@@ -38,6 +38,110 @@ export const ADD_SLATE = gql`
   }
 `;
 
+export const ADD_RESTAURANT = gql`
+  mutation addRestaurant($restaurantId: String!, $name: String!, $category: String, $image: String, $link: String, $distance: String, $slateId: String) {
+    addRestaurant(restaurantId: $restaurantId, name: $name, category: $category, image: $image, link: $link, distance: $distance, slateId: $slateId) {
+      _id
+      name
+      restaurants {
+        restaurantId
+        name
+        category
+        image
+        link
+        distance
+      }
+    }
+  }
+`;
+
+export const REMOVE_RESTAURANT = gql`
+  mutation removeRestaurant($restaurantId: String!, $slateId: String) {
+    removeRestaurant(restaurantId: $restaurantId, slateId: $slateId) {
+      _id
+      name
+      restaurants{
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
+      }
+    }
+  }
+`;
+
+export const REMOVE_SLATE = gql`
+  mutation removeSlate($_id: String!) {
+    removeSlate(_id: $_id) {
+      _id
+      username
+      slates{
+        _id
+        name
+        restaurants{
+          restaurantId
+          name
+          category
+          link
+          image
+          distance
+        }
+      }
+    }
+  }
+`;
+
+export const ADD_FRIEND = gql`
+  mutation addFriend($_id: String!) {
+    addFriend(_id: $_id) {
+      _id
+      username
+      slates{
+        name
+        restaurants{
+          restaurantId
+          name
+          category
+          link
+          image
+          distance
+        }
+      }
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const REMOVED_FRIEND = gql`
+  mutation removeFriend($_id: String!) {
+    removeFriend(_id: $_id) {
+      _id
+      username
+      slates{
+        name
+        restaurants{
+          restaurantId
+          name
+          category
+          link
+          image
+          distance
+        }
+      }
+      friends {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {
