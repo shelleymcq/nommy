@@ -22,6 +22,12 @@ const resolvers = {
         populate: 'restaurants'
       }).populate('friends');
     },
+    userByEmail: async (_, args) => {
+      return User.findOne({ email: args.email }).populate('slates').populate({
+        path: 'slates',
+        populate: 'restaurants'
+      }).populate('friends');
+    },
     me: async (_, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id });

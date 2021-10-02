@@ -78,6 +78,32 @@ export const QUERY_USER_BY_NAME = gql`
   }
 `;
 
+export const QUERY_USER_BY_EMAIL = gql`
+  query userByEmail($email: String!) {
+    userByEmail(email: $email) {
+      _id
+      username
+      email
+      slates{
+        _id
+        name
+        restaurants{
+          restaurantId
+          name
+          category
+          link
+          image
+          distance
+        }
+      }
+      friends{
+        _id
+        username
+      }
+    }
+  }
+`;
+
 export const QUERY_ME = gql`
   query me {
     me {
