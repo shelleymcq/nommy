@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
+import { useQuery } from '@apollo/client';
+// import { QUERY_SLATE } from '../../utils/queries';
+import { useHistory } from 'react-router-dom'
+import SlateById from '../SlateById/SlateById'
 
 const SlateCards = ({slates}) => {
     console.log("props:", slates)
+    const [slateId, setSlateId] = useState('');
+
+    const history = useHistory();
+
+    const redirect = (idPath) => {
+        history.push(`/slates/${idPath}`)
+    }
+
+    const handleSlateClick = (event) => {
+        const id = event.currentTarget.getAttribute("data-id");
+        // console.log("clicked slate's id:", id)
+
+        setSlateId(id);
+
+        redirect(id)
+    }
+
     return (
        
         <>
         <Container>
+            <div>{slateId}</div>
             {/* <CardColumns> */}
                 {/* MAP OVER ALL OF SLATE'S RESTAURANTS AND CREATE A CARD FOR EACH*/}
                 {slates.map((slate) => {
                     return(
                         <Card 
-                            key={slate._id} 
+                            key={slate._id}
+                            data-id={slate._id} 
                             border='dark'
                             className="slate-card"
+                            onClick={(event)=>handleSlateClick(event)}
                         >   
                             {/* {restaurant.image ? (
                                 <a 

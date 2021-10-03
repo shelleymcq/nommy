@@ -154,8 +154,8 @@ export const QUERY_SLATES = gql`
 `;
 
 export const QUERY_SLATE = gql`
-  query slate {
-    slate {
+  query slate($id: ID!) {
+    slate(id: $id) {
       _id
       name
       slateCreator
