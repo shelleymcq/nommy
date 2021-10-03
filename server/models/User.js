@@ -19,6 +19,9 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  avatar: {
+    type: String,
+  },
   friends: [
     {
       type: Schema.Types.ObjectId,

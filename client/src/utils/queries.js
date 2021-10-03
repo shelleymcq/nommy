@@ -6,6 +6,7 @@ export const QUERY_USERS = gql`
       _id
       username
       email
+      avatar
       slates {
         _id
         name
@@ -32,6 +33,7 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      avatar
       slates{
         _id
         name
@@ -58,6 +60,7 @@ export const QUERY_USER_BY_NAME = gql`
       _id
       username
       email
+      avatar
       slates{
         _id
         name
@@ -87,6 +90,7 @@ export const QUERY_USER_BY_EMAIL = gql`
       slates{
         _id
         name
+        avatar
         restaurants{
           restaurantId
           name
@@ -110,6 +114,7 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      avatar
       slates{
         _id
         name
