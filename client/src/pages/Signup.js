@@ -12,6 +12,7 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
+    avatar: '',
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -75,7 +76,27 @@ const Signup = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <Modal>Choose Avatar</Modal>
+                <div className="input-field form-group">
+                    <label>Select your avatar:</label>
+                    <select
+                      className="form-input"
+                      name="avatar"
+                      type="text"
+                      value={formState.avatar}
+                      onChange={handleChange}
+                    >
+                        <option value="&#x2728;">&#x2728;</option>
+                        <option value="&#x1F920;">&#x1F920;</option>
+                        <option value="&#x1F913;">&#x1F913;</option>
+                        <option value="&#x1F9D0;">&#x1F9D0;</option>
+                        <option value="&#x1F974;">&#x1F974;</option>
+                        <option value="&#x1F60E;">&#x1F60E;</option>
+                        <option value="&#x1F525;">&#x1F525;</option>
+                        <option value="&#x1F643;">&#x1F643;</option>
+                        <option value="&#x1F4AF;">&#x1F4AF;</option>
+                    </select>                    
+                </div>
+                {/* <Modal>Choose Avatar</Modal> */}
                   <br />
                   <br />
                 <button

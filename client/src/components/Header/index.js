@@ -15,7 +15,9 @@ const Header = () => {
       return (
         <>
           <Link className="btn btn-lg btn-info m-2" to="/profile">
-            {Auth.getProfile().data.username}'s profile
+            {Auth.getProfile().data.username}'s profile &nbsp;
+            {Auth.getProfile().data.avatar}
+            {/* {Auth.getProfile().data.avatar} */}
           </Link>
           <Link className="btn btn-lg btn-info m-2" to="/friends">
             myFriends
