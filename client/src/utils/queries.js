@@ -171,6 +171,24 @@ export const QUERY_SLATE = gql`
   }
 `;
 
+export const QUERY_MY_SLATES = gql`
+  query mySlates($slateCreator: String!) {
+    mySlates(slateCreator: $slateCreator) {
+      _id
+      name
+      slateCreator
+      restaurants {
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
+      }
+    }
+  }
+`;
+
 export const QUERY_RANDOM_SLATE = gql`
   query randomSlate {
     randomSlate {

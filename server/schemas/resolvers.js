@@ -40,6 +40,12 @@ const resolvers = {
     slate: async (_, args) => {
       return Slate.findOne({ _id: args.id }).populate('restaurants');
     },
+    mySlates: async (_, args, context) => {
+      
+      const mySlates = await Slate.find({slateCreator: args.slateCreator}).populate('restaurants');
+      console.log("mySlates in server:", mySlates)
+      return mySlates
+    },
     randomSlate: async () => {
       const slates = await Slate.find().populate('restaurants');
       const chosenSlate = slates[Math.floor(Math.random() * slates.length)]
