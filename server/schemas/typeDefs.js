@@ -39,6 +39,9 @@ const typeDefs = gql`
     me: User
     slates: [Slate]
     slate(id: ID!): Slate
+    randomSlate: Slate
+    myRandomRestaurant: Restaurant
+    suggestions(category: String!): [Restaurant]
   }
 
   type Mutation {

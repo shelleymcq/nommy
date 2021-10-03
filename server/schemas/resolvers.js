@@ -39,6 +39,28 @@ const resolvers = {
     },
     slate: async (_, args) => {
       return Slate.findOne({ _id: args.id }).populate('restaurants');
+    },
+    randomSlate: async () => {
+      const slates = await Slate.find().populate('restaurants');
+      const chosenSlate = slates[Math.floor(Math.random() * slates.length)]
+      // console.log("chosenSlate:", chosenSlate);
+      return chosenSlate
+    },
+    myRandomRestaurant: async (_, args, context) => {
+      if (context.user) {
+        const mySlates = await Slate.find({ slateCreator: context.user.username }).populate('restaurants')
+        const chosenSlate = mySlates[Math.floor(Math.random() * mySlates.length)]
+        const slateRestaurants = chosenSlate.restaurants
+        const chosenRestaurant = slateRestaurants[Math.floor(Math.random() * slateRestaurants.length)]
+        // console.log("chosenRestaurant:",chosenRestaurant)
+        return chosenRestaurant
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    suggestions: async (_, args) => {
+      const suggestions = await Restaurant.find({ category: args.category })
+      // console.log("suggestions:",suggestions)
+      return suggestions
     }
   },
 
@@ -70,6 +92,7 @@ const resolvers = {
         const slate = await Slate.create({
           name,
           // slateCreator: context.user.username,
+          slateCreator: "cali"
         });
 
         // console.log("new slate:", slate._id)
