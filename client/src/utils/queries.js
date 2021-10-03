@@ -135,6 +135,7 @@ export const QUERY_SLATES = gql`
     slates {
       _id
       name
+      slateCreator
       restaurants {
         restaurantId
         name
@@ -152,6 +153,7 @@ export const QUERY_SLATE = gql`
     slate {
       _id
       name
+      slateCreator
       restaurants {
         restaurantId
         name
@@ -160,6 +162,50 @@ export const QUERY_SLATE = gql`
         image
         distance
       }
+    }
+  }
+`;
+
+export const QUERY_RANDOM_SLATE = gql`
+  query randomSlate {
+    randomSlate {
+      _id
+      name
+      slateCreator
+      restaurants {
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
+      }
+    }
+  }
+`;
+
+export const QUERY_MY_RANDOM_RESTAURANT = gql`
+  query myRandomRestaurant {
+    myRandomRestaurant {
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
+    }
+  }
+`;
+
+export const QUERY_SUGGESTIONS = gql`
+  query suggestions($category: String!) {
+    suggestions(category: $category) {
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
     }
   }
 `;

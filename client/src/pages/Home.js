@@ -1,43 +1,33 @@
 // Node Modules
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 // Utilities
 import Auth from '../utils/auth';
-import { QUERY_USERS } from '../utils/queries';
+import { QUERY_ME, QUERY_USERS, QUERY_SLATES } from '../utils/queries';
 // Components
 import UserList from '../components/UserList';
+import context from 'react-bootstrap/esm/AccordionContext';
+import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import RestaurantCards from '../components/RestaurantCards/RestaurantCards'
+import LoggedOutHome from '../components/LoggedOutHome/LoggedOutHome';
+import LoggedInHome from '../components/LoggedInHome/LoggedInHome';
 
 const Home = () => {
-  const { loading, data } = useQuery(QUERY_USERS);
-  const users = data?.users || [];
-
-  const renderUserList = () => {
-    if (loading) {
-      return <h2>Loading...</h2>
-    } else {
-      return <UserList users={users} title="List of Users" />
-    }
-  } 
-
-  const renderUsername = () => {
-    if (!Auth.loggedIn()) return null;
-    return Auth.getProfile().data.username;
-  }
 
   return (
     <main>
-      <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          This is the logged in home page. Welcome, {renderUsername()}!
-          From here, you can either view your profile page, your friends' list, or log out.
-        </div>
-        <div className="col-12 col-md-8 mb-3">
-          {renderUserList()}
-        </div>
-      </div>
+      {Auth.loggedIn() ?
+      
+      <>
+      <LoggedInHome />
+      </>
+      
+      : 
+
+      <>
+      <LoggedOutHome />
+      </>
+      }
     </main>
   );
 };
