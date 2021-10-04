@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { User, Slate, Restaurant } = require('../models');
+const API = require('../utils/api');
 
 const resolvers = {
   Query: {
@@ -67,7 +68,12 @@ const resolvers = {
       const suggestions = await Restaurant.find({ category: args.category })
       // console.log("suggestions:",suggestions)
       return suggestions
-    }
+    },
+    apiSearch: async (_, args) => {
+      const apiResponse = await API.search(args.searchInput)
+      console.log("api response from server:", apiResponse)
+      return apiResponse
+    },
   },
 
   Mutation: {

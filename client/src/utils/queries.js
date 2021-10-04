@@ -232,3 +232,16 @@ export const QUERY_SUGGESTIONS = gql`
     }
   }
 `;
+
+export const QUERY_SEARCH = gql`
+  query apiSearch {
+    apiSearch {
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
+    }
+  }
+`;
