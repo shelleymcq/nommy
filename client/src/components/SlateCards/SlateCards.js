@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import Auth from '../../utils/auth';
-import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 // import { QUERY_SLATE } from '../../utils/queries';
+import { REMOVE_SLATE } from '../../utils/mutations';
 import { useHistory } from 'react-router-dom'
 import SlateById from '../SlateById/SlateById'
+import UserList from '../UserList';
 
 const SlateCards = ({slates}) => {
-    console.log("props:", slates)
-    const [slateId, setSlateId] = useState('');
+    // console.log("props:", slates)
+
+    // const [slateId, setSlateId] = useState('');
+    // const [removeSlate, { error }] = useMutation(REMOVE_SLATE);
 
     const history = useHistory();
 
@@ -20,16 +24,36 @@ const SlateCards = ({slates}) => {
         const id = event.currentTarget.getAttribute("data-id");
         // console.log("clicked slate's id:", id)
 
-        setSlateId(id);
+        // setSlateId(id);
 
         redirect(id)
     }
+
+    // const handleDeleteSlate = (slateId) => {
+    //     // GRAB USER TOKEN IF USER LOGGED IN
+    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    //     // IF USER NOT LOGGED IN, DON'T CONTINUE
+    //     if (!token) {
+    //     return false;
+    //     }
+
+    //     // USE MUTATION TO REMOVE THE SLATE BY SLATE ID
+    //     try {
+    //     removeSlate({
+    //         variables: { slateId }
+    //     });
+
+    //     } catch (error) {
+    //     console.error(error);
+    //     }
+    // }
 
     return (
        
         <>
         <Container>
-            <div>{slateId}</div>
+            {/* <div>{Auth.getProfile().data.username}</div> */}
             {/* <CardColumns> */}
                 {/* MAP OVER ALL OF SLATE'S RESTAURANTS AND CREATE A CARD FOR EACH*/}
                 {slates.map((slate) => {
@@ -67,6 +91,16 @@ const SlateCards = ({slates}) => {
                                         &#10084;
                                     </Button>
                                 {/* )} */}
+                                {/* {Auth.getProfile().data.username === slate.slateCreator ? 
+                                    <Button
+                                        className='btn-block btn-danger'
+                                        onClick={() => handleDeleteSlate(slate._id)}
+                                    >
+                                        <i class="fas fa-trash"></i>
+                                    </Button>
+                                    :
+                                    null
+                                } */}
                             </Card.Body>
                         </Card>
                     )

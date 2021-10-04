@@ -55,7 +55,8 @@ const typeDefs = gql`
     addFriend(_id: String!): User
 
     removeRestaurant(restaurantId: String!, slateId: String): Slate
-    removeSlate(_id: String!): User
+    # removeSlate(_id: String!): User
+    removeSlate(_id: String!): Slate
     removeFriend(_id: String!): User
   }
 `;
