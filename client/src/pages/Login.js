@@ -68,6 +68,16 @@ const Login = (props) => {
                   value={formState.password}
                   onChange={handleChange}
                 />
+                {/* <div class="input-field form-group">
+                <select id="neighborhood">
+                  <option value="" disabled selected>Choose your neighborhood</option>
+                  <option value="1">Greenwood-Patillo-Howard</option>
+                  <option value="2">Adair Park</option>
+                  <option value="3">Great Lakes</option>
+                  <option value="4">Parkwood {'\u2728'}</option>
+                </select>
+                <label>Choose a Neighborhood:</label>
+              </div> */}
                 <button
                   className="btn btn-block btn-primary"
                   style={{ cursor: 'pointer' }}

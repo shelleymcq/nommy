@@ -6,7 +6,7 @@ import Rob from '../assets/img/img-4.png';
 import Friend from '../components/Friend/Friend';
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
-function FriendPage() {
+function FriendPage(props) {
   return (
     <div className="Wrapper">
       <div className="cards">
