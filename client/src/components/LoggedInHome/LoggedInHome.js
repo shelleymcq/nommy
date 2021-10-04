@@ -8,7 +8,10 @@ import RestaurantCards from '../RestaurantCards/RestaurantCards'
 // Styling
 import './LoggedInHome.css';
 
-const LoggedInHome = () => {
+
+
+
+const LoggedInHome = (props) => {
   const { loading, data } = useQuery(QUERY_MY_RANDOM_RESTAURANT);
   const myRestaurant = data?.myRandomRestaurant || [];
   console.log("myRestaurant:", myRestaurant.category)
@@ -16,24 +19,28 @@ const LoggedInHome = () => {
   const mySuggestions = suggestionsResponse.data?.suggestions || [];
   console.log("suggested restaurants:", mySuggestions)
   
+  
+ 
   if (loading) {
     <>
         <h1>Loading...</h1>
     </>
   }
+ 
 
   return (
     <main>
       <div className="slate-header">
         <h2 className="center">Because you liked: {myRestaurant.name}...</h2>
       </div>
-      <div>{mySuggestions ? 
-      <div>
-        <RestaurantCards restaurants={mySuggestions} />
-      </div>
-      : null}</div>
-      
+      <div>{mySuggestions ?
+        <div>
+          <RestaurantCards restaurants={mySuggestions} />
+        </div>
+        : null}</div>
     </main>
+
+
   );
 };
 

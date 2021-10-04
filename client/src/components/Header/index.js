@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Nommy from '../../assets/img/nommy-icon.png'
+import './header.css'
 import Auth from '../../utils/auth';
 
 const Header = () => {
@@ -13,47 +14,52 @@ const Header = () => {
     // If logged in show logout controls
     if (Auth.loggedIn()) {
       return (
-        <>
-          <Link className="btn btn-lg btn-info m-2" to="/profile">
-            {Auth.getProfile().data.username}'s profile &nbsp;
-            {Auth.getProfile().data.avatar}
-            {/* {Auth.getProfile().data.avatar} */}
+        <div className='navbar-nav ml-auto'>
+          <Link className="btn btn-outline-dark m-2" to="/">
+            Home
           </Link>
-          <Link className="btn btn-lg btn-info m-2" to="/friends">
+          <Link className="btn btn-outline-dark m-2" to="/profile">
+            {Auth.getProfile().data.username}'s profile
+          </Link>
+          <Link className="btn btn-outline-dark m-2" to="/friends">
             myFriends
           </Link>
-          <button className="btn btn-lg btn-light m-2" onClick={logout}>
+          <Link className="btn btn-outline-dark m-2" to="/search">
+            Search
+          </Link>
+          <button className="btn btn-outline-dark m-2" onClick={logout}>
             Logout
           </button>
-        </>
+        </div>
       );
     }
     // If logged out show login controls
     return (
-      <>
-        <Link className="btn btn-lg btn-info m-2" to="/login">
+      <div className='navbar-nav ml-auto'>
+        <Link className="btn btn-outline-dark m-2" to="/login">
           Login
         </Link>
-        <Link className="btn btn-lg btn-light m-2" to="/signup">
+        <Link className="btn btn-outline-dark m-2" to="/signup">
           Signup
         </Link>
-      </>
+      </div>
     )
   };
 
   return (
-    <div>
+    <div className="navBtn">
       {/* changes navbar colors */}
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav className="navbar navbar-expand-lg">
 <div className="container-fluid">
-<Link className="navbar-brand" to="/home"><img src="./assets/images/logo.png" alt="logo" height="65px" width="100px"/></Link>
+{/* <Link className="navbar-brand" to="/home"></Link> */}
+  <img src={Nommy} alt="logo" height="65px" width="130px"/>
 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span className="navbar-toggler-icon"></span>
 </button>
 
 <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-{/* Search Bar
+            {/* Search Bar
   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
       <section className="search-bar">
           <div className="container">
