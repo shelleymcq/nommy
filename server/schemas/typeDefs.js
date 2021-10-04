@@ -44,6 +44,7 @@ const typeDefs = gql`
     randomSlate: Slate
     myRandomRestaurant: Restaurant
     suggestions(category: String!): [Restaurant]
+    apiSearch(searchInput: String!): [Restaurant]
   }
 
   type Mutation {

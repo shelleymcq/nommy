@@ -47,7 +47,7 @@ const SearchRestaurants = () => {
 
       // const searchTerm = "pizza"
 
-      const response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&limit=50&location=${location}&term=${searchInput}`, {
+      const response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&limit=20&location=${location}&term=${searchInput}`, {
         headers: {
           "Authorization": `Bearer ${access_token}`
         } 
