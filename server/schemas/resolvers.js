@@ -94,19 +94,18 @@ const resolvers = {
       return { token, user };
     },
     addSlate: async (parent, { name }, context) => {
-      //if (context.user) {
+      if (context.user) {
         const slate = await Slate.create({
           name,
-          // slateCreator: context.user.username,
-          slateCreator: "cali"
+          slateCreator: context.user.username,
         });
 
         // console.log("new slate:", slate._id)
 
         const updatedUser = await User.findOneAndUpdate(
-          // { _id: context.user._id },
+          { _id: context.user._id },
           // using an ID from my seeds for testing purposes on GraphQL
-          { _id: "6157e2ac9a561b7ec8a741bb"},
+          // { _id: "6157e2ac9a561b7ec8a741bb"},
           { $addToSet: { slates: {...slate} } },
           {
             new: true,
@@ -115,8 +114,8 @@ const resolvers = {
         ).populate('slates');
         // console.log("updatedUser:",updatedUser)
         return updatedUser;
-      //}
-      // throw new AuthenticationError('You need to be logged in!');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     addRestaurant: async (parent, { restaurantId, name,  category, image, link, distance, slateId }, context) => {
       // if (context.user) {
