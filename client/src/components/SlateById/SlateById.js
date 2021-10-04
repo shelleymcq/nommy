@@ -1,11 +1,11 @@
 // Node Modules
-import React from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Jumbotron, Container, CardColumns, Card, Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 // Utilities
 import Auth from '../../utils/auth';
 import { QUERY_SLATE } from '../../utils/queries';
-import { REMOVE_SLATE } from '../../utils/mutations'
+import { REMOVE_SLATE, EDIT_SLATE } from '../../utils/mutations'
 import { useParams, useHistory } from 'react-router-dom'
 // Components
 import RestaurantCards from '../RestaurantCards/RestaurantCards'
@@ -21,8 +21,10 @@ const SlateById = () => {
     const returnedSlate = data?.slate || [];
     const restaurants = returnedSlate.restaurants;
     // console.log("restaurants:", restaurants)
-
-    const [removeSlate, { error }] = useMutation(REMOVE_SLATE);
+    const [showSlateModal, setShowSlateModal] = useState(false);
+    const [updatedName, setUpdatedName] = useState('');
+    const [removeSlate, { error: error1 }] = useMutation(REMOVE_SLATE);
+    const [editSlate, { error: error2}] = useMutation(EDIT_SLATE);
 
     const history = useHistory();
 
@@ -31,8 +33,34 @@ const SlateById = () => {
         history.go(0)
     }
 
-    const handleEditSlate = (slateId) => {
-      alert(`you clicked edit slate for ${slateId}`)
+    const handleEditClick = (event) => {
+      setShowSlateModal(true)
+    }
+
+    const handleClose = () => {
+      setShowSlateModal(false);
+    }
+
+    const handleChange = (event) => {
+      const { value } = event.target;
+
+      setUpdatedName(value);
+  }
+
+    const handleEditSlate = (event) => {
+      // alert(`you clicked edit slate for ${slateId}`)
+      event.preventDefault()
+      console.log(`you changed the name of ${id}`)
+      try {
+        editSlate({
+            variables: { _id: id, name: updatedName }
+        });
+
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+      }
+
     }
 
     const handleDeleteSlate = (slateId) => {
@@ -81,7 +109,8 @@ const SlateById = () => {
           </Button>
           <Button
             className='btn-block btn-danger'
-            onClick={() => handleEditSlate(returnedSlate._id)}
+            // onClick={() => handleEditSlate(returnedSlate._id)}
+            onClick={(event) => handleEditClick(event)}
           >
             <i class="fas fa-pen"></i>
           </Button>
@@ -95,7 +124,22 @@ const SlateById = () => {
         <RestaurantCards restaurants={restaurants} />
       </div>
       : null}</div>
-      
+      <Modal show={showSlateModal} onHide={() => handleClose()}>
+          <Modal.Header closeButton>
+          <Modal.Title>EDIT SLATE NAME:</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group >
+              <Form.Label>New Slate Name: </Form.Label>
+              <Form.Control type="text" onChange={(event)=>handleChange(event)} value={updatedName} placeholder="name input"/>           
+            </Form.Group>
+          </Modal.Body>
+          <Modal.Footer>
+          <Button variant="primary" onClick={(event) => handleEditSlate(event)}>
+              Submit 
+          </Button>
+          </Modal.Footer>
+      </Modal>
     </main>
   );
 };
