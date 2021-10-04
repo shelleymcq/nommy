@@ -26,10 +26,10 @@ const Profile = () => {
   // console.log(user.username)
   // const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }})
   const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }});
-  console.log("slatesResponse:", slatesResponse)
+  // console.log("slatesResponse:", slatesResponse)
   const mySlates = slatesResponse.data?.mySlates || [];
 
-  console.log("my slates:", mySlates)
+  // console.log("my slates:", mySlates)
 
   if (error) console.log(error);
 

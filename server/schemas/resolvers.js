@@ -43,7 +43,7 @@ const resolvers = {
     mySlates: async (_, args, context) => {
       
       const mySlates = await Slate.find({slateCreator: args.slateCreator}).populate('restaurants');
-      console.log("mySlates in server:", mySlates)
+      // console.log("mySlates in server:", mySlates)
       return mySlates
     },
     randomSlate: async () => {
@@ -130,7 +130,7 @@ const resolvers = {
           distance
         });
 
-        // console.log("restaurant to create:", restaurant)
+        console.log("restaurant to create:", restaurant)
 
         // FIND THE SLATE AND ADD THE RESTAURANT TO IT
         const updatedSlate = await Slate.findOneAndUpdate(
@@ -141,7 +141,7 @@ const resolvers = {
             runValidators: true,
           }
         ).populate('restaurants');
-        // console.log("updatedSlate:",updatedSlate)
+        console.log("updatedSlate:",updatedSlate)
         // RETURN THE UPDATED SLATE WITH RESTAURANT ADDED
         return updatedSlate;
       // }
@@ -164,29 +164,34 @@ const resolvers = {
       // THROW ERROR IF USER NOT LOGGED IN
       // throw new AuthenticationError('You need to be logged in!');
     },
-    removeSlate: async (parent, { _id }, context) => {
-      // if (context.user) {
+    removeSlate: async (parent, args, context) => {
+      if (context.user) {
         // REMOVE THE SELECTED RESTAURANT FROM THE DATABASE
         const removedSlate = await Slate.findOneAndDelete(
-          { _id }
+          { _id: args._id }
         )
-        console.log("removed slate:", removedSlate)
+        // console.log("removed slate:", removedSlate)
         
         // RETURN THE UPDATED SLATE
-        const updatedUser = await User.findOne(
-          // { _id: context.user._id },
-          // using an ID from my seeds for testing purposes on GraphQL
-          { _id: "6157e2ac9a561b7ec8a741bb"}
-          ).populate('slates')
-          .populate({
-            path: 'slates',
-            populate: 'restaurants'
-          });
-          
-        return updatedUser;
-      // }
+        // const updatedUser = await User.findOne(
+        //   { _id: context.user._id },
+        //   {
+        //     new: true,
+        //     runValidators: true,
+        //   }
+        //   // using an ID from my seeds for testing purposes on GraphQL
+        //   // { _id: "6157e2ac9a561b7ec8a741bb"}
+        //   ).populate('slates')
+        //   .populate({
+        //     path: 'slates',
+        //     populate: 'restaurants'
+        //   });
+        //   console.log("updatedUser from server:", updatedUser)
+        // return updatedUser;
+        return removedSlate
+      }
       // THROW ERROR IF USER NOT LOGGED IN
-      // throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
     addFriend: async (parent, { _id }, context) => {
       //if (context.user) {
