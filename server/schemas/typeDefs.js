@@ -58,6 +58,8 @@ const typeDefs = gql`
     # removeSlate(_id: String!): User
     removeSlate(_id: String!): Slate
     removeFriend(_id: String!): User
+
+    editSlate(_id: String!, name: String!): Slate
   }
 `;
 

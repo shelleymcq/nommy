@@ -120,7 +120,7 @@ export const ADD_FRIEND = gql`
   }
 `;
 
-export const REMOVED_FRIEND = gql`
+export const REMOVE_FRIEND = gql`
   mutation removeFriend($_id: String!) {
     removeFriend(_id: $_id) {
       _id
@@ -145,6 +145,21 @@ export const REMOVED_FRIEND = gql`
   }
 `;
 
+export const EDIT_SLATE = gql`
+  mutation editSlate($_id: String!, $name: String!) {
+    editSlate(_id: $_id, name: $name) {
+      name
+      slateCreator
+      restaurants{
+        name
+        category
+        link
+        image
+        distance
+      }
+    }
+  }
+`;
 
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {

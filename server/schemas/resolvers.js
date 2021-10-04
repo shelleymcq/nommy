@@ -169,24 +169,6 @@ const resolvers = {
         const removedSlate = await Slate.findOneAndDelete(
           { _id: args._id }
         )
-        // console.log("removed slate:", removedSlate)
-        
-        // RETURN THE UPDATED SLATE
-        // const updatedUser = await User.findOne(
-        //   { _id: context.user._id },
-        //   {
-        //     new: true,
-        //     runValidators: true,
-        //   }
-        //   // using an ID from my seeds for testing purposes on GraphQL
-        //   // { _id: "6157e2ac9a561b7ec8a741bb"}
-        //   ).populate('slates')
-        //   .populate({
-        //     path: 'slates',
-        //     populate: 'restaurants'
-        //   });
-        //   console.log("updatedUser from server:", updatedUser)
-        // return updatedUser;
         return removedSlate
       }
       // THROW ERROR IF USER NOT LOGGED IN
@@ -245,6 +227,23 @@ const resolvers = {
       // }
       // THROW ERROR IF USER NOT LOGGED IN
       // throw new AuthenticationError('You need to be logged in!');
+    },
+    editSlate: async (parent, args, context) => {
+      if (context.user) {
+        // REMOVE THE SELECTED RESTAURANT FROM THE DATABASE
+        const updatedSlate = await Slate.findOneAndUpdate(
+          { _id: args._id },
+          { name: args.name },
+          {
+            new: true,
+            runValidators: true,
+          }
+        ).populate('restaurants')
+        console.log("updatedSlate:", updatedSlate)
+        return updatedSlate
+      }
+      // THROW ERROR IF USER NOT LOGGED IN
+      throw new AuthenticationError('You need to be logged in!');
     },
   }
 };
