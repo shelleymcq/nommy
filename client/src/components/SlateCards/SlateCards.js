@@ -1,10 +1,13 @@
 import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
+import Auth from '../../utils/auth'
+// import { useQuery } from '@apollo/client';
 
-const SlateCards = ({slates}) => {
+const SlateCards = ({slates, restaurants}) => {
+    console.log("slate cards restaurant props:", restaurants)
     const history = useHistory();
-
+    
     const redirect = (idPath) => {
         history.push(`/slates/${idPath}`)
     }
@@ -18,10 +21,8 @@ const SlateCards = ({slates}) => {
 
         <>
         <Container>
-            {/* <div>{Auth.getProfile().data.username}</div> */}
-            {/* <CardColumns> */}
                 {/* MAP OVER ALL OF SLATE'S RESTAURANTS AND CREATE A CARD FOR EACH*/}
-                {slates.map((slate) => {
+                {slates.map((slate, index) => {
                     return(
                         <Card 
                             key={slate._id}
@@ -30,47 +31,40 @@ const SlateCards = ({slates}) => {
                             className="slate-card"
                             onClick={(event)=>handleSlateClick(event)}
                         >   
-                            {/* {restaurant.image ? (
-                                <a 
-                                    href={restaurant.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <Card.Img 
-                                        src={restaurant.image}
-                                        alt={`Highlight for ${restaurant.name}`}
-                                        // variant='top'
-                                        width="300px"
-                                    />
-                                </a>
-                            ) : null} */}
+                            {restaurants[index] ? (
+                                <Card.Img 
+                                    src={restaurants[index].image}
+                                    alt={`Highlight for ${restaurants[index].name}`}
+                                    width="300px"
+                                />
+                            ) : 
+                                <Card.Img 
+                                    src="https://p0.piqsels.com/preview/253/131/676/celebrate-celebration-cheers-dining-thumbnail.jpg"
+                                    alt={`Generic restaurant image`}
+                                    width="300px"
+                                />
+                            }
                             <Card.Body>
                                 <Card.Title>{slate.name}</Card.Title>
-                                <p className='small'>{slate.slateCreator}</p>
-
-                                {/* {Auth.loggedIn() && ( */}
+                                {Auth.getProfile().data.username !== slate.slateCreator ?
+                                    <p className='small'>{slate.slateCreator}</p>
+                                    :
+                                    null
+                                }
+                                {Auth.loggedIn() && Auth.getProfile().data.username !== slate.slateCreator ?
                                     <Button
                                         className='btn-block btn-danger'
                                         // onClick={() => handleSaveBook(book.bookId)}
                                     >
                                         &#10084;
                                     </Button>
-                                {/* )} */}
-                                {/* {Auth.getProfile().data.username === slate.slateCreator ? 
-                                    <Button
-                                        className='btn-block btn-danger'
-                                        onClick={() => handleDeleteSlate(slate._id)}
-                                    >
-                                        <i class="fas fa-trash"></i>
-                                    </Button>
                                     :
                                     null
-                                } */}
+                                }
                             </Card.Body>
                         </Card>
                     )
                 })}
-            {/* </CardColumns> */}
         </Container>
         </>
     )

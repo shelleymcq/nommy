@@ -232,3 +232,16 @@ export const QUERY_SUGGESTIONS = gql`
     }
   }
 `;
+
+export const QUERY_SLATE_IMAGE = gql`
+  query slateImage($slateCreator: String!) {
+    slateImage(slateCreator: $slateCreator) {
+        restaurantId
+        name
+        category
+        link
+        image
+        distance
+    }
+  }
+`;

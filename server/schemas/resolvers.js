@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { User, Slate, Restaurant } = require('../models');
 const API = require('../utils/api');
+// const { default: context } = require('react-bootstrap/esm/AccordionContext');
 
 const resolvers = {
   Query: {
@@ -68,6 +69,15 @@ const resolvers = {
       const suggestions = await Restaurant.find({ category: args.category })
       // console.log("suggestions:",suggestions)
       return suggestions
+    },
+    slateImage: async (_, args, context) => {
+      const mySlates = await Slate.find({ slateCreator: args.slateCreator }).populate('restaurants')
+      const newArray = mySlates.map((slate)=>{
+        const {restaurants} = slate;
+        return restaurants[0] || null
+      })
+    
+      return newArray
     },
   },
 
