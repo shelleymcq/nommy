@@ -19,7 +19,7 @@ const typeDefs = gql`
   }
 
   type Restaurant {
-    restaurantId: String!
+    restaurantId: String
     category: String
     name: String!
     image: String

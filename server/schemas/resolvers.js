@@ -70,9 +70,22 @@ const resolvers = {
       return suggestions
     },
     apiSearch: async (_, args) => {
+      console.log(args)
+      try {
       const apiResponse = await API.search(args.searchInput)
-      console.log("api response from server:", apiResponse)
-      return apiResponse
+      const businesses = apiResponse.data.businesses;
+      const restaurantData = businesses.map((restaurant) => ({
+        restaurantId: restaurant.id,
+        name: restaurant.name,
+        link: restaurant.url,
+        image: restaurant.image_url || '',
+        distance: (restaurant.distance* 0.000621).toFixed(2),
+        category: restaurant.categories[0].title
+      }));
+      return restaurantData
+      }catch(err) {
+        console.log(err)
+      }
     },
   },
 

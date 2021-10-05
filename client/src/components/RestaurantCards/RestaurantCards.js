@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Card, Button, Modal, Form } from 'react-bootstrap';
 import Auth from '../../utils/auth';
-// import Modal from 'react-bootstrap/Modal'
-// import Form from 'react-bootstrap/Form'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ME } from '../../utils/queries';
+import { useMutation } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
 
 const RestaurantCards = ({restaurants}) => {
@@ -15,7 +12,7 @@ const RestaurantCards = ({restaurants}) => {
     const [newSlateName, setNewSlateName] = useState('');
 
     // const { loading, data } = useQuery(QUERY_ME)
-    const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
+    const [addRestaurant] = useMutation(ADD_RESTAURANT);
 
     const renderSavingOptions = (event) => {
         const restaurantData = {

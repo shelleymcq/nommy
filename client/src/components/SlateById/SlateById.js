@@ -1,6 +1,6 @@
 // Node Modules
 import React, { useState } from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button, Modal, Form } from 'react-bootstrap';
+import { Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 // Utilities
 import Auth from '../../utils/auth';
@@ -23,8 +23,8 @@ const SlateById = () => {
     // console.log("restaurants:", restaurants)
     const [showSlateModal, setShowSlateModal] = useState(false);
     const [updatedName, setUpdatedName] = useState('');
-    const [removeSlate, { error: error1 }] = useMutation(REMOVE_SLATE);
-    const [editSlate, { error: error2}] = useMutation(EDIT_SLATE);
+    const [removeSlate] = useMutation(REMOVE_SLATE);
+    const [editSlate] = useMutation(EDIT_SLATE);
 
     const history = useHistory();
 

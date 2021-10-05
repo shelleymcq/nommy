@@ -1,19 +1,8 @@
-import React, { useState } from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-import Auth from '../../utils/auth';
-import { useMutation } from '@apollo/client';
-// import { QUERY_SLATE } from '../../utils/queries';
-import { REMOVE_SLATE } from '../../utils/mutations';
+import React from 'react';
+import { Container, Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
-import SlateById from '../SlateById/SlateById'
-import UserList from '../UserList';
 
 const SlateCards = ({slates}) => {
-    // console.log("props:", slates)
-
-    // const [slateId, setSlateId] = useState('');
-    // const [removeSlate, { error }] = useMutation(REMOVE_SLATE);
-
     const history = useHistory();
 
     const redirect = (idPath) => {
@@ -22,35 +11,11 @@ const SlateCards = ({slates}) => {
 
     const handleSlateClick = (event) => {
         const id = event.currentTarget.getAttribute("data-id");
-        // console.log("clicked slate's id:", id)
-
-        // setSlateId(id);
-
         redirect(id)
     }
 
-    // const handleDeleteSlate = (slateId) => {
-    //     // GRAB USER TOKEN IF USER LOGGED IN
-    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    //     // IF USER NOT LOGGED IN, DON'T CONTINUE
-    //     if (!token) {
-    //     return false;
-    //     }
-
-    //     // USE MUTATION TO REMOVE THE SLATE BY SLATE ID
-    //     try {
-    //     removeSlate({
-    //         variables: { slateId }
-    //     });
-
-    //     } catch (error) {
-    //     console.error(error);
-    //     }
-    // }
-
     return (
-       
+
         <>
         <Container>
             {/* <div>{Auth.getProfile().data.username}</div> */}
@@ -80,7 +45,7 @@ const SlateCards = ({slates}) => {
                                 </a>
                             ) : null} */}
                             <Card.Body>
-                                <Card.Title><a href="#" target="_blank" rel="noopener noreferrer">{slate.name}</a></Card.Title>
+                                <Card.Title>{slate.name}</Card.Title>
                                 <p className='small'>{slate.slateCreator}</p>
 
                                 {/* {Auth.loggedIn() && ( */}

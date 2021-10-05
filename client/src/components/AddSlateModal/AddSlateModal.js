@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_SLATE } from '../../utils/mutations';
 
@@ -7,7 +6,7 @@ import { ADD_SLATE } from '../../utils/mutations';
 
 const AddSlateModal = () => {
   const [slateName, setSlateName] = useState({ name: '' });
-  const [addSlate, { error, data }] = useMutation(ADD_SLATE);
+  const [addSlate, { error }] = useMutation(ADD_SLATE);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -23,7 +22,7 @@ const AddSlateModal = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await addSlate({
+      await addSlate({
         variables: { ...slateName },
       }); 
     } catch (e) {
