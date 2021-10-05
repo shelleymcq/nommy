@@ -1,0 +1,13 @@
+.edit-delete-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-delete-div .btn,
+.edit-delete-div .btn-primary {
+  width: 5%;
+  background-color: white;
+  color: black;
+  border: none;
+}

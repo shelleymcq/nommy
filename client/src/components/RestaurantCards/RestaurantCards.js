@@ -4,6 +4,7 @@ import Auth from '../../utils/auth';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useMutation } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
+import './RestaurantCards.css'
 
 const RestaurantCards = ({restaurants}) => {
     // console.log("props:", restaurants)
@@ -60,8 +61,7 @@ const RestaurantCards = ({restaurants}) => {
 
     return (
         <>
-        <Container>
-            {/* <CardColumns> */}
+        <Container className="restaurant-card-container">
                 {/* MAP OVER ALL OF SLATE'S RESTAURANTS AND CREATE A CARD FOR EACH*/}
                 {restaurants.map((restaurant) => {
                     return(
@@ -72,17 +72,16 @@ const RestaurantCards = ({restaurants}) => {
                             className="restaurant-card"
                         >   
                             {restaurant.image ? (
-                                <a 
-                                    href={restaurant.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
+                                // <a 
+                                //     href={restaurant.link}
+                                //     target="_blank"
+                                //     rel="noopener noreferrer"
+                                // >
                                     <Card.Img 
                                         src={restaurant.image}
                                         alt={`Highlight for ${restaurant.name}`}
-                                        width="300px"
                                     />
-                                </a>
+                                // </a>
                             ) : null}
                             <Card.Body>
                                 <Card.Title><a href={restaurant.link} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></Card.Title>
@@ -106,7 +105,6 @@ const RestaurantCards = ({restaurants}) => {
                         </Card>
                     )
                 })}
-            {/* </CardColumns> */}
             {showModal ? 
                 // <p>modal to show</p>
                 <Modal show={showModal} onHide={() => handleClose()}>

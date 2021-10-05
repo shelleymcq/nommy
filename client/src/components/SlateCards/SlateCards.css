@@ -1,0 +1,13 @@
+.profile-slates-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.slate-card {
+  width: 300px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
