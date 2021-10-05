@@ -2,7 +2,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 // Utilities
-import Auth from '../../utils/auth';
 import { QUERY_RANDOM_SLATE } from '../../utils/queries';
 // Components
 import RestaurantCards from '../RestaurantCards/RestaurantCards'
@@ -10,7 +9,7 @@ import RestaurantCards from '../RestaurantCards/RestaurantCards'
 import './LoggedOutHome.css';
 
 const LoggedOutHome = () => {
-  const { loading, data } = useQuery(QUERY_RANDOM_SLATE);
+  const { data } = useQuery(QUERY_RANDOM_SLATE);
   const randomSlate = data?.randomSlate || [];
 
   return (

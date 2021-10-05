@@ -1,15 +1,14 @@
 // Node Modules
 import React, { useState } from 'react';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
-import { Jumbotron, Container, CardColumns, Card, Button, Modal, Form } from 'react-bootstrap';
+import { Redirect, useParams } from 'react-router-dom';
+import { Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 
 // Utilities
 import Auth from '../utils/auth';
-import { QUERY_USERS, QUERY_USER, QUERY_ME, QUERY_MY_SLATES } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES } from '../utils/queries';
+
 // Components
-import UserList from '../components/UserList';
-import AddSlateModal from '../components/AddSlateModal/AddSlateModal';
 import SlateCards from '../components/SlateCards/SlateCards'
 import { ADD_SLATE } from '../utils/mutations';
 
