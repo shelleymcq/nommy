@@ -6,7 +6,7 @@ import { useQuery, useMutation } from '@apollo/client';
 
 // Utilities
 import Auth from '../utils/auth';
-import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES, QUERY_SLATE_IMAGE } from '../utils/queries';
 
 // Components
 import SlateCards from '../components/SlateCards/SlateCards'
@@ -16,31 +16,22 @@ const Profile = () => {
   const { id } = useParams();
   const [modalDisplay, setModalDisplay] = useState(false);
   const [slateToAdd, setSlateToAdd] = useState('');
+  const [restaurantImages, setRestaurantImages] = useState([])
   // Get current user
   const { loading, data } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
   });
+ 
   const [addSlate, { error }] = useMutation(ADD_SLATE);
 
-  // Get a list of all users
-  // const { usersLoading, data: usersData } = useQuery(QUERY_USERS);
   const user = data?.me || data?.user || {};
-  // const users = usersData?.users || [];
-  // console.log(user.username)
-  // const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }})
   const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }});
-  // console.log("slatesResponse:", slatesResponse)
   const mySlates = slatesResponse.data?.mySlates || [];
+  const slatesRestaurantResponse = useQuery(QUERY_SLATE_IMAGE, { variables: { slateCreator: user.username }});
+  const myRestaurants = slatesRestaurantResponse.data?.slateImage || [];  
 
-  // console.log("my slates:", mySlates)
 
   if (error) console.log(error);
-
-  // redirect to personal profile page if username is yours
-  // NOT SURE WHAT THIS IS DOING. Button in Header -> index.js folder redirects us here
-  if (Auth.loggedIn() && Auth.getProfile().data._id === id) {
-    return <Redirect to="/profile" />;
-  }
 
   if (loading) {
     return <h4>Loading...</h4>;
@@ -81,14 +72,11 @@ const Profile = () => {
     } catch (e) {
         console.error(e);
     }
-    console.log("new slate name:", slateToAdd)
-    console.log(user.username)
     setModalDisplay(false);
     setSlateToAdd('');
   }
 
   const renderCurrentUserInfo = () => {
-    // console.log(user.username)
     if (id) return null;
     return (
       <ul>
@@ -107,10 +95,9 @@ const Profile = () => {
         </h2>
         <div>
           {renderCurrentUserInfo()}
-          {/* {renderUserList()} */}
         </div>
         <div>
-          <SlateCards slates={mySlates}/>
+          <SlateCards slates={mySlates} restaurants={myRestaurants}/>
         </div>
           <div>
             <button className="btn btn-lg btn-light m-2" onClick={() => renderModal()}>

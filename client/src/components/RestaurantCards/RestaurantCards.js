@@ -80,7 +80,6 @@ const RestaurantCards = ({restaurants}) => {
                                     <Card.Img 
                                         src={restaurant.image}
                                         alt={`Highlight for ${restaurant.name}`}
-                                        // variant='top'
                                         width="300px"
                                     />
                                 </a>
