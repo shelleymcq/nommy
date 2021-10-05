@@ -22,6 +22,9 @@ const userSchema = new Schema({
   avatar: {
     type: String,
   },
+  lastSearch: {
+    type: String,
+  },
   friends: [
     {
       type: Schema.Types.ObjectId,

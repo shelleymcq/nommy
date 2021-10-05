@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {
   Jumbotron, Container, Col, Form, Button,
 } from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import { API_SEARCH } from '../utils/mutations'
 import RestaurantCards from '../components/RestaurantCards/RestaurantCards'
 
 const SearchRestaurants = () => {
@@ -9,44 +11,26 @@ const SearchRestaurants = () => {
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
+  const [apiSearch, { error }] = useMutation(API_SEARCH);
 
   // create method to search for restaurants and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    console.log(event.target)
+    console.log("search input:" ,searchInput)
 
     if (!searchInput) {
       return false;
     }
 
     try {
-      const access_token = "sSXKlBRl8-Udgkwovew8iS0fHqM9wWIbdRr6UHc1eC3q2ExpuS7RIbie_2jYcXbb4L_pDc-sYs1Sjv-xCdcp3NzrB60XIRiveoDTZUg5mxOznH3sKpw1JcGOQbFUYXYx";
+      const apiResponse = await apiSearch({
+        variables: { searchInput: searchInput }
+    });
+       const returnedRestaurants = apiResponse.data.apiSearch
 
-      const location = "Atlanta";
-
-      const response = await fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants&limit=20&location=${location}&term=${searchInput}`, {
-        headers: {
-          "Authorization": `Bearer ${access_token}`
-        } 
-      })
-
-      if (!response.ok) {
-        // throw new Error('something went wrong!');
-        console.log("something went wrong!")
-      }
-
-      const { businesses } = await response.json();
-      console.log("json response:", businesses[0])
-      console.log("json response:", businesses[0].categories[0].title)
-
-      const restaurantData = businesses.map((restaurant) => ({
-        restaurantId: restaurant.id,
-        name: restaurant.name,
-        link: restaurant.url,
-        image: restaurant.image_url || '',
-        distance: (restaurant.distance* 0.000621).toFixed(2)
-      }));
-
-      setSearchedRestaurants(restaurantData);
+      setSearchedRestaurants(returnedRestaurants);
+      
       setSearchInput('');
     } catch (err) {
       console.error(err);
@@ -58,7 +42,7 @@ const SearchRestaurants = () => {
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
           <h1>this is the search results page</h1>
-          <Form onSubmit={handleFormSubmit}>
+          <Form onSubmit={(event)=> handleFormSubmit(event)}>
             <Form.Row>
               <Col xs={12} md={8}>
                 <Form.Control
