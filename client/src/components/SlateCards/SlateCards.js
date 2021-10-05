@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom'
 import Auth from '../../utils/auth'
-// import { useQuery } from '@apollo/client';
+import './SlateCards.css'
 
 const SlateCards = ({slates, restaurants}) => {
     console.log("slate cards restaurant props:", restaurants)
@@ -20,7 +20,7 @@ const SlateCards = ({slates, restaurants}) => {
     return (
 
         <>
-        <Container>
+        <Container className="profile-slates-container">
                 {/* MAP OVER ALL OF SLATE'S RESTAURANTS AND CREATE A CARD FOR EACH*/}
                 {slates.map((slate, index) => {
                     return(

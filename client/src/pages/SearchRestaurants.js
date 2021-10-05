@@ -11,7 +11,7 @@ const SearchRestaurants = () => {
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
-  const [apiSearch, { error }] = useMutation(API_SEARCH);
+  const [apiSearch] = useMutation(API_SEARCH);
 
   // create method to search for restaurants and set state on form submit
   const handleFormSubmit = async (event) => {

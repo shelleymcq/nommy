@@ -1,22 +1,20 @@
 // Node Modules
 import React, { useState } from 'react';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 
 // Utilities
-import Auth from '../utils/auth';
-import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES, QUERY_SLATE_IMAGE } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES, QUERY_SLATE_IMAGE } from '../../utils/queries';
 
 // Components
-import SlateCards from '../components/SlateCards/SlateCards'
-import { ADD_SLATE } from '../utils/mutations';
+import SlateCards from '../../components/SlateCards/SlateCards'
+import { ADD_SLATE } from '../../utils/mutations';
 
 const Profile = () => {
   const { id } = useParams();
   const [modalDisplay, setModalDisplay] = useState(false);
   const [slateToAdd, setSlateToAdd] = useState('');
-  const [restaurantImages, setRestaurantImages] = useState([])
   // Get current user
   const { loading, data } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },

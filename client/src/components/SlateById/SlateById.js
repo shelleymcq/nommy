@@ -10,6 +10,7 @@ import { useParams, useHistory } from 'react-router-dom'
 // Components
 import RestaurantCards from '../RestaurantCards/RestaurantCards'
 // Styling
+import './SlateById.css'
 
 
 const SlateById = () => {
@@ -98,17 +99,17 @@ const SlateById = () => {
       <div className="slate-header">
         <h2 className="center">{returnedSlate.name}</h2>
       </div>
-      <div>
+      <div className="edit-delete-div">
         {Auth.getProfile().data.username === returnedSlate.slateCreator ? 
           <>
           <Button
-            className='btn-block btn-danger'
+            className='btn-block btn'
             onClick={() => handleDeleteSlate(returnedSlate._id)}
           >
             <i class="fas fa-trash"></i>
           </Button>
           <Button
-            className='btn-block btn-danger'
+            className='btn-block btn'
             // onClick={() => handleEditSlate(returnedSlate._id)}
             onClick={(event) => handleEditClick(event)}
           >
