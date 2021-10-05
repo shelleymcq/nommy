@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String
     password: String
     avatar: String
+    lastSearch: String
     friends: [User]
     slates: [Slate]
   }
@@ -44,7 +45,6 @@ const typeDefs = gql`
     randomSlate: Slate
     myRandomRestaurant: Restaurant
     suggestions(category: String!): [Restaurant]
-    apiSearch(searchInput: String!): [Restaurant]
   }
 
   type Mutation {
@@ -61,6 +61,7 @@ const typeDefs = gql`
     removeFriend(_id: String!): User
 
     editSlate(_id: String!, name: String!): Slate
+    apiSearch(searchInput: String!): [Restaurant]
   }
 `;
 
