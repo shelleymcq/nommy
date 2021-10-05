@@ -37,10 +37,10 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     slates: async () => {
-      return Slate.find().populate('restaurants');
+      return await Slate.find().populate('restaurants');
     },
     slate: async (_, args) => {
-      return Slate.findOne({ _id: args.id }).populate('restaurants');
+      return await Slate.findOne({ _id: args.id }).populate('restaurants');
     },
     mySlates: async (_, args, context) => {
       

@@ -5,7 +5,8 @@ import Auth from '../../utils/auth'
 import './SlateCards.css'
 
 const SlateCards = ({slates, restaurants}) => {
-    console.log("slate cards restaurant props:", restaurants)
+    // console.log("slate cards restaurant props:", restaurants)
+    // console.log("slates' names:", slates)
     const history = useHistory();
     
     const redirect = (idPath) => {

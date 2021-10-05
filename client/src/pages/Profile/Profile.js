@@ -19,19 +19,24 @@ const Profile = () => {
   const { loading, data } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
   });
- 
-  const [addSlate, { error }] = useMutation(ADD_SLATE);
-
   const user = data?.me || data?.user || {};
   const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }});
   const mySlates = slatesResponse.data?.mySlates || [];
+  // const mySlates = slatesResponse.data?.mySlates || [];
   const slatesRestaurantResponse = useQuery(QUERY_SLATE_IMAGE, { variables: { slateCreator: user.username }});
   const myRestaurants = slatesRestaurantResponse.data?.slateImage || [];  
+  const [addSlate, { error }] = useMutation(ADD_SLATE);
+
+  const referringURL = document.referrer.split('/').slice(3,4).toString()
+  
+  if(referringURL === 'slates') {
+    window.location.reload()
+  }
 
 
   if (error) console.log(error);
 
-  if (loading) {
+  if (loading ) {
     return <h4>Loading...</h4>;
   }
 

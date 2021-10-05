@@ -25,10 +25,10 @@ const Footer = () => {
           </span>{' '}
           by Nommy Team.
         </h4>
-        <h8>
+        <h6>
           <p>Power by <i className="fab fa-yelp"></i>
           </p>
-        </h8>
+        </h6>
       </div>
     </footer>
   );
