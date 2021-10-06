@@ -33,3 +33,9 @@
     justify-content: center;
 }
 
+.name{
+    color: #000000;
+    margin-top: 10px;
+    font-family: 'Roboto Slab', serif;
+}
+
