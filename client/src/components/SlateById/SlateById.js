@@ -24,6 +24,7 @@ const SlateById = () => {
     // console.log("restaurants:", restaurants)
     const [showSlateModal, setShowSlateModal] = useState(false);
     const [updatedName, setUpdatedName] = useState('');
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [removeSlate] = useMutation(REMOVE_SLATE);
     const [editSlate] = useMutation(EDIT_SLATE);
 
@@ -40,6 +41,7 @@ const SlateById = () => {
 
     const handleClose = () => {
       setShowSlateModal(false);
+      setShowDeleteModal(false);
     }
 
     const handleChange = (event) => {
@@ -49,9 +51,8 @@ const SlateById = () => {
   }
 
     const handleEditSlate = (event) => {
-      // alert(`you clicked edit slate for ${slateId}`)
       event.preventDefault()
-      console.log(`you changed the name of ${id}`)
+      
       try {
         editSlate({
             variables: { _id: id, name: updatedName }
@@ -64,19 +65,12 @@ const SlateById = () => {
 
     }
 
+    const renderDeleteConfirmModal = (slateId) => {
+      setShowDeleteModal(true);
+    }
+
     const handleDeleteSlate = (slateId) => {
-      console.log("you clicked the delete button")
-      console.log('slateId to delete:', slateId)
     
-      // // GRAB USER TOKEN IF USER LOGGED IN
-      // const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-      // // IF USER NOT LOGGED IN, DON'T CONTINUE
-      // if (!token) {
-      //   return false;
-      // }
-
-      // USE MUTATION TO REMOVE THE SLATE BY SLATE ID
       try {
         removeSlate({
             variables: { _id: slateId }
@@ -104,7 +98,8 @@ const SlateById = () => {
           <>
           <Button
             className='btn-block btn'
-            onClick={() => handleDeleteSlate(returnedSlate._id)}
+            // onClick={() => handleDeleteSlate(returnedSlate._id)}
+            onClick={()=>renderDeleteConfirmModal(returnedSlate._id)}
           >
             <i class="fas fa-trash"></i>
           </Button>
@@ -126,7 +121,7 @@ const SlateById = () => {
       </div>
       : null}</div>
       <Modal show={showSlateModal} onHide={() => handleClose()}>
-          <Modal.Header closeButton>
+          <Modal.Header closeButton onClick={()=>handleClose()}>
           <Modal.Title>EDIT SLATE NAME:</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -141,6 +136,22 @@ const SlateById = () => {
           </Button>
           </Modal.Footer>
       </Modal>
+      {showDeleteModal ?
+      <Modal.Dialog show={showDeleteModal} onHide={() => handleClose()}>
+        <Modal.Header closeButton onClick={()=>handleClose()}>
+          <Modal.Title className="modalText">Delete Slate</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p className="modalText">Are you sure you want to delete {returnedSlate.name}?</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => handleClose()}>Cancel</Button>
+          <Button variant="danger" onClick={() => handleDeleteSlate(returnedSlate._id)}>Delete Slate</Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+      : null }
     </main>
   );
 };
