@@ -1,0 +1,27 @@
+.search-container{
+    background-color:rgba(190, 161, 161, 0.3);
+    margin-top: 20px;
+    text-align: center;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.container{
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.search{
+    background-color:rgba(192,192,192,0.3);
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.btn-search{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

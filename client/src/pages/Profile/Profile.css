@@ -1,0 +1,13 @@
+.col-12{
+    text-align: center;
+}
+
+.profile-card{
+    background-color:rgba(192,192,192,0.3);
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.info{
+    color: #fff;
+}
