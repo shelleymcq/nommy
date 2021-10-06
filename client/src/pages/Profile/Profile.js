@@ -16,6 +16,7 @@ const Profile = () => {
   const { id } = useParams();
   const [modalDisplay, setModalDisplay] = useState(false);
   const [slateToAdd, setSlateToAdd] = useState('');
+  const [showWarning, setShowWarning] = useState(false);
   // Get current user
   const { loading, data } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
@@ -62,13 +63,21 @@ const Profile = () => {
   const handleChange = (event) => {
       const { value } = event.target;
 
+      if(value){
+        setShowWarning(false)
+      }
+
       setSlateToAdd(value);
   }
 
   const handleSubmit = (event) => {
     
     event.preventDefault();
-    
+    if (!slateToAdd) {
+      setShowWarning(true)
+      return 
+    }
+
     try {
         addSlate({
             variables: { name: slateToAdd }
@@ -120,8 +129,12 @@ const Profile = () => {
             <Modal.Body>
                 <Form.Group >
                     <Form.Label>Slate name: </Form.Label>
-                    <Form.Control type="text" onChange={(event)=>handleChange(event)} value={slateToAdd} placeholder="name input"/>           
+                    <Form.Control type="text" onChange={(event)=>handleChange(event)} value={slateToAdd} placeholder="name input" required/>           
                 </Form.Group>
+                {showWarning?
+                  <p>You must enter a name for your slate!</p>
+                  : null
+                }
             </Modal.Body>
             <Modal.Footer>
             <Button variant="primary" onClick={(event) => handleSubmit(event)}>
