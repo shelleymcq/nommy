@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css'
 import Auth from '../../utils/auth';
+import Logo from '../../assets/img/nommy.jpg'
 
 const Header = () => {
   const logout = (event) => {
@@ -15,19 +16,19 @@ const Header = () => {
     if (Auth.loggedIn()) {
       return (
         <div className='navbar-nav ml-auto'>
-          <Link className="btn btn-outline-dark m-2" to="/">
+          <Link className="btn btn-outline-light m-2" to="/">
             Home
           </Link>
-          <Link className="btn btn-outline-dark m-2" to="/profile">
+          <Link className="btn btn-outline-light m-2" to="/profile">
             {Auth.getProfile().data.username}'s profile
           </Link>
-          <Link className="btn btn-outline-dark m-2" to="/friends">
+          <Link className="btn btn-outline-light m-2" to="/friends">
             myFriends
           </Link>
-          <Link className="btn btn-outline-dark m-2" to="/search">
+          <Link className="btn btn-outline-light m-2" to="/search">
             Search
           </Link>
-          <button className="btn btn-outline-dark m-2" onClick={logout}>
+          <button className="btn btn-outline-light m-2" onClick={logout}>
             Logout
           </button>
         </div>
@@ -36,10 +37,10 @@ const Header = () => {
     // If logged out show login controls
     return (
       <div className='navbar-nav ml-auto'>
-        <Link className="btn btn-outline-dark m-2" to="/login">
+        <Link className="btn btn-outline-light m-2" to="/login">
           Login
         </Link>
-        <Link className="btn btn-outline-dark m-2" to="/signup">
+        <Link className="btn btn-outline-light m-2" to="/signup">
           Signup
         </Link>
       </div>
@@ -52,7 +53,7 @@ const Header = () => {
 <nav className="navbar navbar-expand-lg">
 <div className="container-fluid">
 {/* <Link className="navbar-brand" to="/home"></Link> */}
-  <img src={Nommy} alt="logo" height="65px" width="130px"/>
+  <img src={ Logo } alt="logo" height="65px" width="130px"/>
 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span className="navbar-toggler-icon"></span>
 </button>

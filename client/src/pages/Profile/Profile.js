@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
+import './Profile.css' 
 
 // Utilities
 import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES, QUERY_SLATE_IMAGE } from '../../utils/queries';
@@ -92,12 +93,13 @@ const Profile = () => {
   }
 
   return (
-    <div>
+    <div className='profile-card'>
       <div className="flex-row justify-center mb-3">
-        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
+        <h2 className="col-12 col-md-10 text-light p-3 mb-5">
+        {/* <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5"> */}
           Viewing {id ? `${user.username}'s` : 'your'} profile.
         </h2>
-        <div>
+        <div className='info'>
           {renderCurrentUserInfo()}
         </div>
         <div>
@@ -108,6 +110,8 @@ const Profile = () => {
               Add Slate
             </button>
           </div>
+
+          
           {modalDisplay ? 
             <Modal show={modalDisplay} onHide={() => handleClose()}>
             <Modal.Header closeButton>
