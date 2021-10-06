@@ -52,7 +52,9 @@ export default function Friend(props) {
                     {/* <Card.Img variant="top" src={props.img} alt="Avatar" /> */}
                     <Card.Body>
                         <img className="card-img" src={props.img} alt="Avatar" />
+                        <div className='name'>
                         <Card.Title>{props.name}</Card.Title>
+                        </div>
                         <button onClick={() => alert('❤️❤️❤️')} className="card-btn btn btn-outline-info ">❤️</button>
                         <button onClick={() => alert('follow-me')} className="card-btn btn btn-outline-info">Follow</button>
                     </Card.Body>

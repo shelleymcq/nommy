@@ -11,3 +11,7 @@
 .info{
     color: #fff;
 }
+
+li{
+    list-style: none;
+}
