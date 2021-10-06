@@ -22,6 +22,10 @@ const userSchema = new Schema({
   avatar: {
     type: String,
   },
+  zipcode: {
+    type: String,
+    match: [/^[0-9]{5}(?:-[0-9]{4})?$/, 'Must match a zipcode!']
+  },
   lastSearch: {
     type: String,
   },

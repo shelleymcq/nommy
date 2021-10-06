@@ -20,6 +20,7 @@ const Profile = () => {
     variables: { id },
   });
   const user = data?.me || data?.user || {};
+  console.log("my zip:", user.zipcode)
   const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }});
   const mySlates = slatesResponse.data?.mySlates || [];
   // const mySlates = slatesResponse.data?.mySlates || [];

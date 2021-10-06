@@ -31,6 +31,7 @@ const Signup = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
+      console.log("added user:", data.addUser)
 
       Auth.login(data.addUser.token);
     } catch (e) {
@@ -73,6 +74,14 @@ const Signup = () => {
                   name="password"
                   type="password"
                   value={formState.password}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
+                  placeholder="Your zipcode"
+                  name="zipcode"
+                  type="zipcode"
+                  value={formState.zipcode}
                   onChange={handleChange}
                 />
                 <div className="input-field form-group">

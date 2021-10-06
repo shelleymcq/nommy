@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Nommy from '../../assets/img/nommy-icon.png'
 import './header.css'
 import Auth from '../../utils/auth';
 

@@ -13,8 +13,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!, $avatar: String!) {
-    addUser(username: $username, email: $email, password: $password, avatar: $avatar) {
+  mutation addUser($username: String!, $email: String!, $password: String!, $avatar: String!, $zipcode: String) {
+    addUser(username: $username, email: $email, password: $password, avatar: $avatar, zipcode: $zipcode) {
       token
       user {
         _id
@@ -162,8 +162,8 @@ export const EDIT_SLATE = gql`
 `;
 
 export const API_SEARCH = gql`
-  mutation apiSearch($searchInput: String!) {
-    apiSearch(searchInput: $searchInput) {
+  mutation apiSearch($searchInput: String!, $zipcode: String!) {
+    apiSearch(searchInput: $searchInput, zipcode: $zipcode) {
         restaurantId
         name
         category

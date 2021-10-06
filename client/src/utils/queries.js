@@ -7,6 +7,7 @@ export const QUERY_USERS = gql`
       username
       email
       avatar
+      zipcode
       slates {
         _id
         name
@@ -34,6 +35,7 @@ export const QUERY_USER = gql`
       username
       email
       avatar
+      zipcode
       slates{
         _id
         name
@@ -61,6 +63,7 @@ export const QUERY_USER_BY_NAME = gql`
       username
       email
       avatar
+      zipcode
       slates{
         _id
         name
@@ -87,6 +90,7 @@ export const QUERY_USER_BY_EMAIL = gql`
       _id
       username
       email
+      zipcode
       slates{
         _id
         name
@@ -115,6 +119,7 @@ export const QUERY_ME = gql`
       username
       email
       avatar
+      zipcode
       slates{
         _id
         name

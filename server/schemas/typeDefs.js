@@ -7,6 +7,7 @@ const typeDefs = gql`
     email: String
     password: String
     avatar: String
+    zipcode: String
     lastSearch: String
     friends: [User]
     slates: [Slate]
@@ -49,7 +50,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!, avatar: String!): Auth
+    addUser(username: String!, email: String!, password: String!, avatar: String!, zipcode: String): Auth
     login(email: String!, password: String!): Auth
     
     addSlate(name: String!): User
@@ -62,7 +63,7 @@ const typeDefs = gql`
     removeFriend(_id: String!): User
 
     editSlate(_id: String!, name: String!): Slate
-    apiSearch(searchInput: String!): [Restaurant]
+    apiSearch(searchInput: String!, zipcode: String!): [Restaurant]
   }
 `;
 
