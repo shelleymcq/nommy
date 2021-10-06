@@ -106,10 +106,10 @@ const Profile = () => {
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 text-light p-3 mb-5">
         {/* <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5"> */}
-          Viewing {id ? `${user.username}'s` : 'your'} profile.
+          Viewing {user.username}'s profile<span>{user.avatar}</span>
         </h2>
         <div className='info'>
-          {renderCurrentUserInfo()}
+          {/* {renderCurrentUserInfo()} */}
         </div>
         <div>
           <SlateCards slates={mySlates} restaurants={myRestaurants}/>
@@ -129,10 +129,10 @@ const Profile = () => {
             <Modal.Body>
                 <Form.Group >
                     <Form.Label>Slate name: </Form.Label>
-                    <Form.Control type="text" onChange={(event)=>handleChange(event)} value={slateToAdd} placeholder="name input" required/>           
+                    <Form.Control type="text" onChange={(event)=>handleChange(event)} value={slateToAdd} placeholder="name" required/>           
                 </Form.Group>
                 {showWarning?
-                  <p>You must enter a name for your slate!</p>
+                  <p className="warning-message">You must enter a name for your slate!</p>
                   : null
                 }
             </Modal.Body>
