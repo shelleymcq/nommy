@@ -1,17 +1,24 @@
-.col-12{
-    text-align: center;
+.col-12 {
+  text-align: center;
 }
 
-.profile-card{
-    background-color:rgba(192,192,192,0.3);
-    border-radius: 8px;
-    margin-top: 20px;
+.profile-card {
+  background-color: rgba(192, 192, 192, 0.3);
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
-.info{
-    color: #fff;
+.info {
+  color: #fff;
 }
 
-li{
-    list-style: none;
+li {
+  list-style: none;
+}
+
+.warning-message {
+  color: red;
+  padding-top: 1rem;
+  font-size: 1rem;
+  font-style: italic;
 }

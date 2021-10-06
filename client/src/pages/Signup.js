@@ -93,6 +93,7 @@ const Signup = () => {
                       value={formState.avatar}
                       onChange={handleChange}
                     >
+                        <option>Select an avatar:</option>
                         <option value="&#x2728;">&#x2728;</option>
                         <option value="&#x1F920;">&#x1F920;</option>
                         <option value="&#x1F913;">&#x1F913;</option>
