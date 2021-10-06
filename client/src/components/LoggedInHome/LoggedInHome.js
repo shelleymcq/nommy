@@ -30,7 +30,7 @@ const LoggedInHome = (props) => {
 
   return (
     <main>
-      <div className="slate-header">
+      <div className="header">
         <h2 className="center">Because you liked: {myRestaurant.name}...</h2>
       </div>
       <div>{mySuggestions ?

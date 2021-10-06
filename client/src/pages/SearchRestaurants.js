@@ -5,6 +5,7 @@ import {
 import { useMutation } from '@apollo/client';
 import { API_SEARCH } from '../utils/mutations'
 import RestaurantCards from '../components/RestaurantCards/RestaurantCards'
+import './SearchRestaurants.css'
 
 const SearchRestaurants = () => {
   // create state for holding returned yelp api data
@@ -39,12 +40,14 @@ const SearchRestaurants = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      {/* <Jumbotron fluid className="text-light bg-dark"> */}
+      <Jumbotron fluid className="search">
         <Container>
-          <h1>this is the search results page</h1>
+          <h1>This is the search results page</h1>
           <Form onSubmit={(event)=> handleFormSubmit(event)}>
             <Form.Row>
-              <Col xs={12} md={8}>
+              {/* <Col xs={12} md={8}> */}
+              <Col >
                 <Form.Control
                   name="searchInput"
                   value={searchInput}
@@ -54,8 +57,9 @@ const SearchRestaurants = () => {
                   placeholder="Search for restaurants"
                 />
               </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
+              <Col>
+              {/* <Col xs={12} md={4}> */}
+                <Button className='btn-search' type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
               </Col>
