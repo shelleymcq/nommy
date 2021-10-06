@@ -74,7 +74,7 @@ const resolvers = {
       const mySlates = await Slate.find({ slateCreator: args.slateCreator }).populate('restaurants')
       const newArray = mySlates.map((slate)=>{
         const {restaurants} = slate;
-        return restaurants[0] || null
+        return restaurants[restaurants.length-1] || null
       })
     
       return newArray

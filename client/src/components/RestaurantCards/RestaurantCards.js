@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Container, Card, Button, Modal, Form } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 import 'bootstrap/dist/css/bootstrap.min.css'
+// import { useMutation } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
 // Utilities
-import { QUERY_MY_SLATES } from '../../utils/queries';
+import { QUERY_MY_SLATES, QUERY_ME } from '../../utils/queries';
 
 import './RestaurantCards.css'
 
@@ -15,17 +16,15 @@ const RestaurantCards = ({restaurants}) => {
     const [restaurantToSave, setRestaurantToSave] = useState({});
     const [newSlateName, setNewSlateName] = useState('');
 
-    // const { loading, data } = useQuery(QUERY_ME)
-    // const user = data?.me || {};
+    const { loading, data } = useQuery(QUERY_ME)
+    const myUserData = data?.me || {};
 
     const [addRestaurant] = useMutation(ADD_RESTAURANT);
 
-    const myUsername = Auth.getProfile().data.username || 'cali'
-
-    const slatesRes = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: myUsername }});
+    const slatesRes = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: myUserData.username }});
 
     const allMySlates = slatesRes.data?.mySlates || [];
-    // console.log("AllMySlates from rest cards:", allMySlates)
+    console.log("AllMySlates from rest cards:", allMySlates)
 
     const renderSavingOptions = (event) => {
         const restaurantData = {
@@ -36,7 +35,6 @@ const RestaurantCards = ({restaurants}) => {
             image: event.target.getAttribute('data-image'),
             distance: event.target.getAttribute('data-distance')
         }
-        // console.log(restaurantData)
         setShowModal(true);
         setRestaurantToSave(restaurantData);
     }
@@ -50,11 +48,11 @@ const RestaurantCards = ({restaurants}) => {
         setNewSlateName(value);
     }
 
-    const redirectToSlate = ()=> {
-        // window.location.replace(`/slates/${newSlateName}`);
-        window.location.replace('/profile')
-        window.location.replace(`/slates/${newSlateName}`)
-    }
+    // const redirectToSlate = ()=> {
+    //     // window.location.replace(`/slates/${newSlateName}`);
+    //     // window.location.replace('/profile')
+    //     window.location.replace(`/slates/${newSlateName}`)
+    // }
 
     const handleSubmit = (event) => {
         
@@ -67,7 +65,7 @@ const RestaurantCards = ({restaurants}) => {
             console.error(e);
         }
         
-        redirectToSlate();
+        // redirectToSlate();
         setShowModal(false)
         setRestaurantToSave({})
         setNewSlateName('')
@@ -137,6 +135,7 @@ const RestaurantCards = ({restaurants}) => {
                                 custom
                                 onChange={(event)=>handleChange(event)}
                             >
+                                <option>Select a slate:</option>
                                 {allMySlates.map((each)=>{
                                     return(
                                         <option key={each._id} value={each._id}>{each.name}</option>
@@ -145,10 +144,6 @@ const RestaurantCards = ({restaurants}) => {
                         
                             </Form.Control>
                         </div>
-                        {/* <Form.Group >
-                            <Form.Label>Slate name: </Form.Label>
-                            <Form.Control type="text" onChange={(event)=>handleChange(event)} value={newSlateName} placeholder="name input"/>           
-                        </Form.Group> */}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={(event) => handleSubmit(event)}>

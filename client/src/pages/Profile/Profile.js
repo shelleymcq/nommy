@@ -27,11 +27,11 @@ const Profile = () => {
   const myRestaurants = slatesRestaurantResponse.data?.slateImage || [];  
   const [addSlate, { error }] = useMutation(ADD_SLATE);
 
-  const referringURL = document.referrer.split('/').slice(3,4).toString()
+  // const referringURL = document.referrer.split('/').slice(3,4).toString()
   
-  if(referringURL === 'slates') {
-    window.location.reload()
-  }
+  // if(referringURL === 'slates') {
+  //   window.location.reload()
+  // }
 
 
   if (error) console.log(error);
