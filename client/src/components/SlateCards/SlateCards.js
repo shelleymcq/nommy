@@ -46,7 +46,7 @@ const SlateCards = ({slates, restaurants}) => {
                                 />
                             }
                             <Card.Body>
-                                <Card.Title>{slate.name}</Card.Title>
+                                <Card.Title className="slateName">{slate.name}</Card.Title>
                                 {Auth.getProfile().data.username !== slate.slateCreator ?
                                     <p className='small'>{slate.slateCreator}</p>
                                     :
