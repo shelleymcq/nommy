@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { API_SEARCH } from '../utils/mutations'
 import RestaurantCards from '../components/RestaurantCards/RestaurantCards'
 import './SearchRestaurants.css'
+import Auth from '../utils/auth'
 
 const SearchRestaurants = () => {
   // create state for holding returned yelp api data
@@ -17,8 +18,6 @@ const SearchRestaurants = () => {
   // create method to search for restaurants and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target)
-    console.log("search input:" ,searchInput)
 
     if (!searchInput) {
       return false;
@@ -26,14 +25,17 @@ const SearchRestaurants = () => {
 
     try {
       const apiResponse = await apiSearch({
-        variables: { searchInput: searchInput }
+        variables: { 
+          searchInput: searchInput, 
+          zipcode: Auth.getProfile().data.zipcode
+        }
     });
        const returnedRestaurants = apiResponse.data.apiSearch
 
       setSearchedRestaurants(returnedRestaurants);
       
       setSearchInput('');
-    } catch (err) {
+    } catch(err) {
       console.error(err);
     }
   };

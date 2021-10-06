@@ -73,6 +73,9 @@ const RestaurantCards = ({restaurants}) => {
     // console.log("showModal:", showModal)
     // console.log("restaurant to save:", restaurantToSave)
     // console.log("restaurants:", restaurants)
+    if (loading ) {
+        return <h4>Loading...</h4>;
+    }
 
     return (
         <>

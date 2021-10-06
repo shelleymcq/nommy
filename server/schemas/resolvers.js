@@ -82,8 +82,8 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (_, { username, email, password, avatar }) => {
-      const user = await User.create({ username, email, password, avatar });
+    addUser: async (_, { username, email, password, avatar, zipcode }) => {
+      const user = await User.create({ username, email, password, avatar, zipcode });
       const token = signToken(user);
       return { token, user };
     },
@@ -259,7 +259,7 @@ const resolvers = {
     apiSearch: async (_, args, context) => {
       console.log("args:", args)
       try {
-      const apiResponse = await API.search(args.searchInput)
+      const apiResponse = await API.search(args.searchInput, args.zipcode)
       const businesses = apiResponse.data.businesses;
       const restaurantData = businesses.map((restaurant) => ({
         restaurantId: restaurant.id,
