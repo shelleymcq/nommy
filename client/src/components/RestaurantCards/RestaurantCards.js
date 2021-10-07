@@ -13,6 +13,7 @@ import './RestaurantCards.css'
 const RestaurantCards = ({restaurants}) => {
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    // const [showDuplicateSlateMsg, setShowDuplicateSlateMsg] = useState(false);
     const [restaurantToSave, setRestaurantToSave] = useState({});
     const [newSlateId, setNewSlateId] = useState('');
     const [newSlateName, setNewSlateName] = useState('');
@@ -25,6 +26,7 @@ const RestaurantCards = ({restaurants}) => {
     const slatesRes = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: myUserData.username }});
 
     const allMySlates = slatesRes.data?.mySlates || [];
+    console.log('rest cards all slates:', allMySlates)
 
     const renderSavingOptions = (event) => {
         const restaurantData = {
@@ -63,6 +65,8 @@ const RestaurantCards = ({restaurants}) => {
         event.preventDefault();
         
         try {
+            // const selectedSlate = allMySlates.filter(slate => slate._id === newSlateId)
+            // console.log(selectedSlate.restaurants)
             addRestaurant({
                 variables: { ...restaurantToSave, slateId: newSlateId}
             });
@@ -146,6 +150,10 @@ const RestaurantCards = ({restaurants}) => {
                                 })}
                             </Form.Control>
                         </div>
+                        {/* {showDuplicateSlateMsg ?
+                        <p className="warning-message">You're loving {restaurantToSave.name}! It's already in {newSlateName}! Add to a different slate?</p>
+                        : null
+                        } */}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary outline-delete" onClick={(event) => handleSubmit(event)}>
