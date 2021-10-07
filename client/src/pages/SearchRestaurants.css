@@ -12,6 +12,15 @@
     padding-bottom: 14px;
 }
 
+.restaurant{
+    background-color:rgba(192,192,192,0.3);
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
 .search{
     background-color:rgba(192,192,192,0.3);
     text-align: center;
