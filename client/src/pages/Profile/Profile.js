@@ -104,21 +104,19 @@ const Profile = () => {
   return (
     <div className='profile-card'>
       <div className="flex-row justify-center mb-3">
-        <h2 className="col-12 col-md-10 text-light p-3 mb-5">
+        <h2 className="col-12 col-md-10 text-light p-3 mb-1">
         {/* <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5"> */}
           Viewing {user.username}'s profile<span>{user.avatar}</span>
-        </h2>
-        <div className='info'>
-          {/* {renderCurrentUserInfo()} */}
-        </div>
-        <div>
-          <SlateCards slates={mySlates} restaurants={myRestaurants}/>
-        </div>
           <div>
-            <button className="btn btn-lg btn-light m-2" onClick={() => renderModal()}>
+            <button className="btn btn-lg btn-primary m-2 outline-delete mt-5" onClick={() => renderModal()}>
               Add Slate
             </button>
           </div>
+        </h2>
+        <div>
+          <SlateCards slates={mySlates} restaurants={myRestaurants}/>
+        </div>
+ 
 
           
           {modalDisplay ? 
@@ -137,8 +135,8 @@ const Profile = () => {
                 }
             </Modal.Body>
             <Modal.Footer>
-            <Button variant="primary" onClick={(event) => handleSubmit(event)}>
-                Submit 
+            <Button variant="primary outline-delete" onClick={(event) => handleSubmit(event)}>
+                Add Slate 
             </Button>
             </Modal.Footer>
         </Modal>

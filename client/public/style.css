@@ -6,3 +6,13 @@
     background-size: cover;
 }
 
+.outline-delete {
+    border: none !important;
+}
+
+.outline-delete:focus {
+    border: none !important;
+    background-color:#80150b !important;
+    box-shadow: none !important;
+}
+

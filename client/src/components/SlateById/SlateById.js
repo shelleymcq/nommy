@@ -97,14 +97,14 @@ const SlateById = () => {
         {Auth.getProfile().data.username === returnedSlate.slateCreator ? 
           <>
           <Button
-            className='btn-block btn'
+            className='btn-block btn outline-delete'
             // onClick={() => handleDeleteSlate(returnedSlate._id)}
             onClick={()=>renderDeleteConfirmModal(returnedSlate._id)}
           >
             <i class="fas fa-trash"></i>
           </Button>
           <Button
-            className='btn-block btn'
+            className='btn-block btn outline-delete'
             // onClick={() => handleEditSlate(returnedSlate._id)}
             onClick={(event) => handleEditClick(event)}
           >
@@ -137,7 +137,7 @@ const SlateById = () => {
           </Modal.Footer>
       </Modal>
       {showDeleteModal ?
-      <Modal.Dialog show={showDeleteModal} onHide={() => handleClose()}>
+      <Modal show={showDeleteModal} onHide={() => handleClose()}>
         <Modal.Header closeButton onClick={()=>handleClose()}>
           <Modal.Title className="modalText">Delete Slate</Modal.Title>
         </Modal.Header>
@@ -147,10 +147,10 @@ const SlateById = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => handleClose()}>Cancel</Button>
-          <Button variant="danger" onClick={() => handleDeleteSlate(returnedSlate._id)}>Delete Slate</Button>
+          <Button variant="primary outline-delete" onClick={() => handleClose()}>Cancel</Button>
+          <Button variant="primary outline-delete" onClick={() => handleDeleteSlate(returnedSlate._id)}>Delete Slate</Button>
         </Modal.Footer>
-      </Modal.Dialog>
+      </Modal>
       : null }
     </main>
   );

@@ -90,24 +90,24 @@ const RestaurantCards = ({restaurants}) => {
                             className="restaurant-card"
                         >   
                             {restaurant.image ? (
-                                // <a 
-                                //     href={restaurant.link}
-                                //     target="_blank"
-                                //     rel="noopener noreferrer"
-                                // >
+                                <a 
+                                    href={restaurant.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
                                     <Card.Img 
                                         src={restaurant.image}
                                         alt={`Highlight for ${restaurant.name}`}
                                     />
-                                // </a>
+                                </a>
                             ) : null}
                             <Card.Body>
-                                <Card.Title><a href={restaurant.link} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></Card.Title>
-                                <p className='small'>Distance: {restaurant.distance} miles</p>
+                                <Card.Title><a className="restaurant-link" href={restaurant.link} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></Card.Title>
+                                <p className='small-text'>Distance: {restaurant.distance} miles</p>
 
                                 {Auth.loggedIn() && (
                                     <Button
-                                        className='btn-block btn-danger'
+                                        className='btn-block btn-danger outline-delete'
                                         data-id={restaurant.restaurantId}
                                         data-name={restaurant.name}
                                         data-category={restaurant.category}
@@ -127,12 +127,10 @@ const RestaurantCards = ({restaurants}) => {
                 // <p>modal to show</p>
                 <Modal show={showModal} onHide={() => handleClose()}>
                     <Modal.Header closeButton>
-                    <Modal.Title>Slate to add restaurant to:</Modal.Title>
+                    <Modal.Title>Would you like to save this restaurant?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
-                            <hr />
-                            Select a slate :
+                        <div className="slate-select-div">
                             <Form.Control
                                 as="select"
                                 custom
@@ -149,8 +147,8 @@ const RestaurantCards = ({restaurants}) => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" onClick={(event) => handleSubmit(event)}>
-                            Submit 
+                        <Button variant="primary outline-delete" onClick={(event) => handleSubmit(event)}>
+                            Save
                         </Button>
                     </Modal.Footer>
                 </Modal>

@@ -43,7 +43,7 @@ const Login = (props) => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <h4 className="card-header bg-black text-light p-2">Login</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -68,18 +68,9 @@ const Login = (props) => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                {/* <div class="input-field form-group">
-                <select id="neighborhood">
-                  <option value="" disabled selected>Choose your neighborhood</option>
-                  <option value="1">Greenwood-Patillo-Howard</option>
-                  <option value="2">Adair Park</option>
-                  <option value="3">Great Lakes</option>
-                  <option value="4">Parkwood {'\u2728'}</option>
-                </select>
-                <label>Choose a Neighborhood:</label>
-              </div> */}
+                <br />
                 <button
-                  className="btn btn-block btn-primary"
+                  className="btn btn-lg btn-primary btn-block outline-delete"
                   style={{ cursor: 'pointer' }}
                   type="submit"
                 >
