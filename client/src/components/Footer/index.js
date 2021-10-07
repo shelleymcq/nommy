@@ -23,10 +23,10 @@ const Footer = () => {
 
           <span>&#127863;
           </span>{' '}
-          by Nommy Team.
+          by the Nommy Team.
         </h4>
         <h6>
-          <p>Power by <i className="fab fa-yelp"></i>
+          <p>Powered by <i className="fab fa-yelp"></i>
           </p>
         </h6>
       </div>
