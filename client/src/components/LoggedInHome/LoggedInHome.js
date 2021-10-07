@@ -1,8 +1,10 @@
 // Node Modules
-import React from 'react';
-import { useQuery } from '@apollo/client';
+import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 // Utilities
-import { QUERY_MY_RANDOM_RESTAURANT, QUERY_SUGGESTIONS } from '../../utils/queries';
+import { QUERY_MY_RANDOM_RESTAURANT } from '../../utils/queries';
+import { API_SEARCH } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 // Components
 import RestaurantCards from '../RestaurantCards/RestaurantCards'
 // Styling
@@ -11,10 +13,19 @@ import './LoggedInHome.css';
 const LoggedInHome = (props) => {
   const { loading, data } = useQuery(QUERY_MY_RANDOM_RESTAURANT);
   const myRestaurant = data?.myRandomRestaurant || [];
-  console.log("myRestaurant:", myRestaurant.category)
-  const suggestionsResponse = useQuery(QUERY_SUGGESTIONS, { variables: { category: myRestaurant ? myRestaurant.category : "Mexican"}});
-  const mySuggestions = suggestionsResponse.data?.suggestions || [];
-  console.log("suggested restaurants:", mySuggestions)
+  const [mySuggestions, setMySuggestions] = useState([])
+  const [apiSearch] = useMutation(API_SEARCH);
+
+  window.onload = () => {
+    const apiResponse = apiSearch({
+      variables: { 
+        searchInput: myRestaurant.category, 
+        zipcode: Auth.getProfile().data.zipcode
+      }
+    }).then((apiResponse) =>
+      setMySuggestions(apiResponse.data.apiSearch)
+    )
+  }
  
   if (loading) {
     <>
