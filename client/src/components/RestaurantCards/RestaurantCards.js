@@ -11,9 +11,10 @@ import { QUERY_MY_SLATES, QUERY_ME } from '../../utils/queries';
 import './RestaurantCards.css'
 
 const RestaurantCards = ({restaurants}) => {
-    // console.log("props:", restaurants)
     const [showModal, setShowModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [restaurantToSave, setRestaurantToSave] = useState({});
+    const [newSlateId, setNewSlateId] = useState('');
     const [newSlateName, setNewSlateName] = useState('');
 
     const { loading, data } = useQuery(QUERY_ME)
@@ -24,7 +25,6 @@ const RestaurantCards = ({restaurants}) => {
     const slatesRes = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: myUserData.username }});
 
     const allMySlates = slatesRes.data?.mySlates || [];
-    console.log("AllMySlates from rest cards:", allMySlates)
 
     const renderSavingOptions = (event) => {
         const restaurantData = {
@@ -41,38 +41,38 @@ const RestaurantCards = ({restaurants}) => {
 
     const handleClose = () => {
         setShowModal(false);
+
+    }
+
+    const handleCloseSuccessMessage = () => {
+        setRestaurantToSave({})
+        setNewSlateId('')
+        setNewSlateName('')
+        setShowSuccessModal(false);
     }
 
     const handleChange = (event) => {
         const { value } = event.target;
-        setNewSlateName(value);
+        const slateName = event.target.selectedOptions[0].innerText
+        
+        setNewSlateId(value);
+        setNewSlateName(slateName)
     }
 
-    // const redirectToSlate = ()=> {
-    //     // window.location.replace(`/slates/${newSlateName}`);
-    //     // window.location.replace('/profile')
-    //     window.location.replace(`/slates/${newSlateName}`)
-    // }
-
-    const handleSubmit = (event) => {
-        
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        
         try {
             addRestaurant({
-                variables: { ...restaurantToSave, slateId: newSlateName}
+                variables: { ...restaurantToSave, slateId: newSlateId}
             });
+            setShowSuccessModal(true)
         } catch (e) {
             console.error(e);
         }
         
-        // redirectToSlate();
         setShowModal(false)
-        setRestaurantToSave({})
-        setNewSlateName('')
     }
-    // console.log("showModal:", showModal)
-    // console.log("restaurant to save:", restaurantToSave)
-    // console.log("restaurants:", restaurants)
     if (loading ) {
         return <h4>Loading...</h4>;
     }
@@ -124,7 +124,6 @@ const RestaurantCards = ({restaurants}) => {
                     )
                 })}
             {showModal ? 
-                // <p>modal to show</p>
                 <Modal show={showModal} onHide={() => handleClose()}>
                     <Modal.Header closeButton>
                     <Modal.Title>Would you like to save this restaurant?</Modal.Title>
@@ -149,6 +148,21 @@ const RestaurantCards = ({restaurants}) => {
                     <Modal.Footer>
                         <Button variant="primary outline-delete" onClick={(event) => handleSubmit(event)}>
                             Save
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                : null}
+                {showSuccessModal ? 
+                <Modal show={showSuccessModal} onHide={() => handleCloseSuccessMessage()}>
+                    <Modal.Header closeButton onClick={() => handleCloseSuccessMessage()}>
+                    <Modal.Title>Now we're cookin'!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p className="modalText">{restaurantToSave.name} was added to your {newSlateName} slate!</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary outline-delete" onClick={() => handleCloseSuccessMessage()}>
+                            Close
                         </Button>
                     </Modal.Footer>
                 </Modal>

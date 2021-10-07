@@ -17,7 +17,7 @@
 }
 
 .restaurant-link:hover {
-color: black;
+  color: black;
 }
 
 .small-text {
@@ -29,4 +29,3 @@ color: black;
   font-size: 22px;
   padding: 15px 0 15px 0;
 }
-
