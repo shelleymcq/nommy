@@ -5,6 +5,9 @@
 .footer{
     /* background-color: #dedede; */
     background-color:rgba(22, 22, 22, 0.5);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 .container{
