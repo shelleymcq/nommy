@@ -8,9 +8,6 @@ import RestaurantCards from '../RestaurantCards/RestaurantCards'
 // Styling
 import './LoggedInHome.css';
 
-
-
-
 const LoggedInHome = (props) => {
   const { loading, data } = useQuery(QUERY_MY_RANDOM_RESTAURANT);
   const myRestaurant = data?.myRandomRestaurant || [];
@@ -18,8 +15,6 @@ const LoggedInHome = (props) => {
   const suggestionsResponse = useQuery(QUERY_SUGGESTIONS, { variables: { category: myRestaurant ? myRestaurant.category : "Mexican"}});
   const mySuggestions = suggestionsResponse.data?.suggestions || [];
   console.log("suggested restaurants:", mySuggestions)
-  
-  
  
   if (loading) {
     <>
@@ -27,20 +22,20 @@ const LoggedInHome = (props) => {
     </>
   }
  
-
   return (
     <main>
-      <div className="header">
-        <h2 className="center">Because you liked: {myRestaurant.name}...</h2>
+      <div>{myRestaurant.length > 0 ?
+          <div className="header">
+            <h2 className="center">Because you liked {myRestaurant.name}, check out these restaurants.</h2>
+            <RestaurantCards restaurants={mySuggestions} />
+          </div>: 
+          <div className="header">
+            <h2 className="center">You don't have any saved restaurants yet.</h2>
+            <h4 className="center">Start your search by adding a new slate to your profile.</h4>
+          </div>
+          }
       </div>
-      <div>{mySuggestions ?
-        <div>
-          <RestaurantCards restaurants={mySuggestions} />
-        </div>
-        : null}</div>
     </main>
-
-
   );
 };
 

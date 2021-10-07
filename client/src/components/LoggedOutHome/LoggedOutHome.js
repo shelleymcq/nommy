@@ -15,8 +15,9 @@ const LoggedOutHome = () => {
   return (
     <main>
       <div className="slate-header">
+        <h1 className="center">Your home for restaurant inspiration!</h1>
         <h2 className="center">{randomSlate.name}</h2>
-        <h4>{randomSlate.slateCreator}</h4>
+        <h4>Slate created by {randomSlate.slateCreator}</h4>
       </div>
       <div>{randomSlate.restaurants ? 
       <div>
