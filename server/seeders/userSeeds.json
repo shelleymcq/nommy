@@ -1,17 +1,44 @@
 [
   {
-    "username": "fitz",
+    "username": "Fitz",
     "email": "fitz@user.com",
-    "password": "password1234"
+    "password": "password1234",
+    "avatar": "😸",
+    "zipcode": "78702"
   },
   {
-    "username": "tink",
+    "username": "Tink",
     "email": "tink@user.com",
-    "password": "password1234"
+    "password": "password1234",
+    "avatar": "🐶",
+    "zipcode": "10001"
   },
   {
-    "username": "cali",
+    "username": "Cali",
     "email": "cali@user.com",
-    "password": "password1234"
+    "password": "password1234",
+    "avatar": "🤪",
+    "zipcode": "30310"
+  },
+  {
+    "username": "Bella",
+    "email": "bella@user.com",
+    "password": "password1234",
+    "avatar": "🙄",
+    "zipcode": "92101"
+  },
+  {
+    "username": "Luna",
+    "email": "luna@user.com",
+    "password": "password1234",
+    "avatar": "🤖",
+    "zipcode": "60601"
+  },
+  {
+    "username": "Rocco",
+    "email": "rocco@user.com",
+    "password": "password1234",
+    "avatar": "🥳",
+    "zipcode": "28801"
   }
 ]

@@ -1,38 +1,66 @@
 [
   {
     "name": "Date Night",
-    "slateCreator": "Someone"
+    "slateCreator": "Cali"
   },
   {
     "name": "Week Nights",
-    "slateCreator": "Someone"
+    "slateCreator": "Cali"
   },
   {
     "name": "Friends in Town",
-    "slateCreator": "Someone"
+    "slateCreator": "Cali"
   },
   {
     "name": "Comfort Food",
-    "slateCreator": "Someone"
+    "slateCreator": "Fitz"
   },
   {
     "name": "Parents in Town",
-    "slateCreator": "Someone"
+    "slateCreator": "Fitz"
   },
   {
     "name": "Special Occasion",
-    "slateCreator": "Someone"
+    "slateCreator": "Fitz"
   },
   {
     "name": "Group Dinners",
-    "slateCreator": "Someone"
+    "slateCreator": "Fitz"
   },
   {
     "name": "Girls Night",
-    "slateCreator": "Someone"
+    "slateCreator": "Tink"
   },
   {
     "name": "Adventurous",
-    "slateCreator": "Someone"
+    "slateCreator": "Tink"
+  },
+  {
+    "name": "Fancy Eats",
+    "slateCreator": "Rocco"
+  },
+  {
+    "name": "Barbecue!",
+    "slateCreator": "Rocco"
+  },
+  {
+    "name": "Beer 'n Cheese",
+    "slateCreator": "Rocco"
+  },
+  {
+    "name": "Business Lunch",
+    "slateCreator": "Luna"
+  },
+  {
+    "name": "Late Night Grub",
+    "slateCreator": "Luna"
+  },
+  {
+    "name": "Cocktails",
+    "slateCreator": "Bella"
+  },
+  {
+    "name": "Dives",
+    "slateCreator": "Bella"
   }
 ]
