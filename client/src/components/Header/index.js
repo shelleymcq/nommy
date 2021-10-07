@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './header.css'
 import Auth from '../../utils/auth';
-import Logo from '../../assets/img/nommy.jpg'
+import NewLogo from '../../assets/img/newLogo3.png'
+
 
 const Header = () => {
   const logout = (event) => {
@@ -53,7 +54,7 @@ const Header = () => {
 <nav className="navbar navbar-expand-lg">
 <div className="container-fluid">
 {/* <Link className="navbar-brand" to="/home"></Link> */}
-  <img src={ Logo } alt="logo" height="65px" width="130px"/>
+  <img src={ NewLogo } alt="logo" height="55px" width="150px"/>
 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span className="navbar-toggler-icon"></span>
 </button>
