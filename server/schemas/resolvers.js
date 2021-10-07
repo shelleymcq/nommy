@@ -153,7 +153,7 @@ const resolvers = {
         ).populate('restaurants');
         console.log("updatedSlate:",updatedSlate)
         // RETURN THE UPDATED SLATE WITH RESTAURANT ADDED
-        return updatedSlate;
+        return updatedSlate.save();
       // }
       // throw new AuthenticationError('You need to be logged in!');
     },
