@@ -24,11 +24,14 @@ const LoggedInHome = (props) => {
  
   return (
     <main>
-      <div>{myRestaurant.length > 0 ?
+      <div>{myRestaurant ?
+          <>
           <div className="header">
             <h2 className="center">Because you liked {myRestaurant.name}, check out these restaurants.</h2>
-            <RestaurantCards restaurants={mySuggestions} />
-          </div>: 
+          </div>
+          <RestaurantCards restaurants={mySuggestions} />
+          </>
+          : 
           <div className="header">
             <h2 className="center">You don't have any saved restaurants yet.</h2>
             <h4 className="center">Start your search by adding a new slate to your profile.</h4>

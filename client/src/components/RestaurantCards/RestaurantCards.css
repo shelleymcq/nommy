@@ -1,5 +1,5 @@
 .restaurant-card {
-  width: 300px;
+  width: 300px;https://github.com/shelleymcq/nommy/pull/64/conflict?name=client%252Fsrc%252Fcomponents%252FRestaurantCards%252FRestaurantCards.js&ancestor_oid=dbe7dd8350f08e325d309c98e5e308f134af317e&base_oid=155df9a3fe732158be8d9979e18051ca45544174&head_oid=fb26ce0e8b3f8251d02eed7056f54a899c006934
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -18,7 +18,7 @@
 }
 
 .restaurant-link:hover {
-color: black;
+  color: black;
 }
 
 .small-text {
@@ -40,3 +40,4 @@ color: black;
   flex-direction: column;
   justify-content: space-between;
 }
+

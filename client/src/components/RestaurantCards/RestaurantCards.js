@@ -12,7 +12,9 @@ import './RestaurantCards.css'
 
 const RestaurantCards = ({restaurants}) => {
     const [showModal, setShowModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [restaurantToSave, setRestaurantToSave] = useState({});
+    const [newSlateId, setNewSlateId] = useState('');
     const [newSlateName, setNewSlateName] = useState('');
 
     const { loading, data } = useQuery(QUERY_ME)
@@ -23,7 +25,6 @@ const RestaurantCards = ({restaurants}) => {
     const slatesRes = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: myUserData.username }});
 
     const allMySlates = slatesRes.data?.mySlates || [];
-    console.log("AllMySlates from rest cards:", allMySlates)
 
     const renderSavingOptions = (event) => {
         const restaurantData = {
@@ -40,28 +41,37 @@ const RestaurantCards = ({restaurants}) => {
 
     const handleClose = () => {
         setShowModal(false);
+
+    }
+
+    const handleCloseSuccessMessage = () => {
+        setRestaurantToSave({})
+        setNewSlateId('')
+        setNewSlateName('')
+        setShowSuccessModal(false);
     }
 
     const handleChange = (event) => {
         const { value } = event.target;
-        setNewSlateName(value);
+        const slateName = event.target.selectedOptions[0].innerText
+        
+        setNewSlateId(value);
+        setNewSlateName(slateName)
     }
 
     const handleSubmit = (event) => {
-        
         event.preventDefault();
+        
         try {
             addRestaurant({
-                variables: { ...restaurantToSave, slateId: newSlateName}
+                variables: { ...restaurantToSave, slateId: newSlateId}
             });
+            setShowSuccessModal(true)
         } catch (e) {
             console.error(e);
         }
         
-        // redirectToSlate();
         setShowModal(false)
-        setRestaurantToSave({})
-        setNewSlateName('')
     }
 
     if (loading ) {
@@ -140,6 +150,21 @@ const RestaurantCards = ({restaurants}) => {
                     <Modal.Footer>
                         <Button variant="primary outline-delete" onClick={(event) => handleSubmit(event)}>
                             Save
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                : null}
+                {showSuccessModal ? 
+                <Modal show={showSuccessModal} onHide={() => handleCloseSuccessMessage()}>
+                    <Modal.Header closeButton onClick={() => handleCloseSuccessMessage()}>
+                    <Modal.Title>Now we're cookin'!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p className="modalText">{restaurantToSave.name} was added to your {newSlateName} slate!</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary outline-delete" onClick={() => handleCloseSuccessMessage()}>
+                            Close
                         </Button>
                     </Modal.Footer>
                 </Modal>
