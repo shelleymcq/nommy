@@ -9,13 +9,11 @@ import './SearchRestaurants.css'
 import Auth from '../utils/auth'
 
 const SearchRestaurants = () => {
-  // create state for holding returned yelp api data
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
-  // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
   const [apiSearch] = useMutation(API_SEARCH);
 
-  // create method to search for restaurants and set state on form submit
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -42,13 +40,11 @@ const SearchRestaurants = () => {
 
   return (
     <>
-      {/* <Jumbotron fluid className="text-light bg-dark"> */}
       <Jumbotron fluid className="search">
         <Container>
           <h1>Hungry? Get Inspired!</h1>
           <Form onSubmit={(event)=> handleFormSubmit(event)}>
             <Form.Row>
-              {/* <Col xs={12} md={8}> */}
               <Col >
                 <Form.Control
                   name="searchInput"
@@ -60,7 +56,6 @@ const SearchRestaurants = () => {
                 />
               </Col>
               <Col>
-              {/* <Col xs={12} md={4}> */}
                 <Button className='btn-primary outline-delete m-4' type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
@@ -70,13 +65,13 @@ const SearchRestaurants = () => {
         </Container>
       </Jumbotron>
 
-      <Container>
+      <Container className='restaurant'>
         <h2>
           {searchedRestaurants.length
             ? `Viewing ${searchedRestaurants.length} results:`
             : null}
         </h2>
-        <div>{searchedRestaurants ? 
+        <div >{searchedRestaurants ? 
           <div>
             <RestaurantCards restaurants={searchedRestaurants} />
           </div>
