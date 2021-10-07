@@ -10,6 +10,7 @@ import Auth from '../utils/auth'
 
 const SearchRestaurants = () => {
   const [searchedRestaurants, setSearchedRestaurants] = useState([]);
+  const [showBackground, setShowBackground] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [apiSearch] = useMutation(API_SEARCH);
 
@@ -31,7 +32,7 @@ const SearchRestaurants = () => {
        const returnedRestaurants = apiResponse.data.apiSearch
 
       setSearchedRestaurants(returnedRestaurants);
-      
+      setShowBackground(true)
       setSearchInput('');
     } catch(err) {
       console.error(err);
@@ -65,7 +66,7 @@ const SearchRestaurants = () => {
         </Container>
       </Jumbotron>
 
-      <Container className='restaurant'>
+      <Container className={showBackground ? "restaurant" : "container"}>
         <h2>
           {searchedRestaurants.length
             ? `Viewing ${searchedRestaurants.length} results:`
