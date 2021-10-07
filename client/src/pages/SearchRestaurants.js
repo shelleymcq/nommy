@@ -45,7 +45,7 @@ const SearchRestaurants = () => {
       {/* <Jumbotron fluid className="text-light bg-dark"> */}
       <Jumbotron fluid className="search">
         <Container>
-          <h1>This is the search results page</h1>
+          <h1>Hungry? Get Inspired!</h1>
           <Form onSubmit={(event)=> handleFormSubmit(event)}>
             <Form.Row>
               {/* <Col xs={12} md={8}> */}
@@ -61,7 +61,7 @@ const SearchRestaurants = () => {
               </Col>
               <Col>
               {/* <Col xs={12} md={4}> */}
-                <Button className='btn-search' type="submit" variant="success" size="lg">
+                <Button className='btn-primary outline-delete m-4' type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
               </Col>
@@ -74,7 +74,7 @@ const SearchRestaurants = () => {
         <h2>
           {searchedRestaurants.length
             ? `Viewing ${searchedRestaurants.length} results:`
-            : 'Search for restaurants to begin'}
+            : null}
         </h2>
         <div>{searchedRestaurants ? 
           <div>

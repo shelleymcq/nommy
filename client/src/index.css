@@ -369,7 +369,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0 0 0.5rem;
   line-height: 1.25;
   /* color: #fff; */
@@ -921,7 +921,7 @@ a:hover {
 
 /* BACKGROUND UTILS */
 .bg-primary {
-  background-color: #2d3e50 !important;
+  background-color: #80150b !important;
 }
 
 .bg-info {
@@ -1013,21 +1013,22 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #2d3e50;
+  background-color: #80150b;
   color: #d9e9e8;
+  font-size: 25px;
 }
 
 .btn.btn-primary:hover {
-  background-color: #57779a;
+  background-color: #6d0c0f;
 }
 
 .btn.btn-danger {
-  background-color: #e64c66;
+  background-color: #80150b;
   color: #ffffff;
 }
 
 .btn.btn-danger:hover {
-  background-color: #ee8294;
+  background-color: #6d0c0f;
 }
 
 .btn.btn-info {
