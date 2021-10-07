@@ -59,7 +59,7 @@ const RestaurantCards = ({restaurants}) => {
         setNewSlateName(slateName)
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         
         try {
@@ -73,6 +73,7 @@ const RestaurantCards = ({restaurants}) => {
         
         setShowModal(false)
     }
+
     if (loading ) {
         return <h4>Loading...</h4>;
     }
@@ -96,6 +97,8 @@ const RestaurantCards = ({restaurants}) => {
                                     rel="noopener noreferrer"
                                 >
                                     <Card.Img 
+                                        className="card-image"
+                                        variant="top" 
                                         src={restaurant.image}
                                         alt={`Highlight for ${restaurant.name}`}
                                     />
@@ -141,7 +144,6 @@ const RestaurantCards = ({restaurants}) => {
                                         <option key={each._id} value={each._id}>{each.name}</option>
                                     )
                                 })}
-                        
                             </Form.Control>
                         </div>
                     </Modal.Body>
