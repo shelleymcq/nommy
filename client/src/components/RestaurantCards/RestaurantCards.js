@@ -11,7 +11,6 @@ import { QUERY_MY_SLATES, QUERY_ME } from '../../utils/queries';
 import './RestaurantCards.css'
 
 const RestaurantCards = ({restaurants}) => {
-    // console.log("props:", restaurants)
     const [showModal, setShowModal] = useState(false);
     const [restaurantToSave, setRestaurantToSave] = useState({});
     const [newSlateName, setNewSlateName] = useState('');
@@ -48,12 +47,6 @@ const RestaurantCards = ({restaurants}) => {
         setNewSlateName(value);
     }
 
-    // const redirectToSlate = ()=> {
-    //     // window.location.replace(`/slates/${newSlateName}`);
-    //     // window.location.replace('/profile')
-    //     window.location.replace(`/slates/${newSlateName}`)
-    // }
-
     const handleSubmit = (event) => {
         
         event.preventDefault();
@@ -70,9 +63,7 @@ const RestaurantCards = ({restaurants}) => {
         setRestaurantToSave({})
         setNewSlateName('')
     }
-    // console.log("showModal:", showModal)
-    // console.log("restaurant to save:", restaurantToSave)
-    // console.log("restaurants:", restaurants)
+
     if (loading ) {
         return <h4>Loading...</h4>;
     }
@@ -96,6 +87,8 @@ const RestaurantCards = ({restaurants}) => {
                                     rel="noopener noreferrer"
                                 >
                                     <Card.Img 
+                                        className="card-image"
+                                        variant="top" 
                                         src={restaurant.image}
                                         alt={`Highlight for ${restaurant.name}`}
                                     />
@@ -124,7 +117,6 @@ const RestaurantCards = ({restaurants}) => {
                     )
                 })}
             {showModal ? 
-                // <p>modal to show</p>
                 <Modal show={showModal} onHide={() => handleClose()}>
                     <Modal.Header closeButton>
                     <Modal.Title>Would you like to save this restaurant?</Modal.Title>
@@ -142,7 +134,6 @@ const RestaurantCards = ({restaurants}) => {
                                         <option key={each._id} value={each._id}>{each.name}</option>
                                     )
                                 })}
-                        
                             </Form.Control>
                         </div>
                     </Modal.Body>
