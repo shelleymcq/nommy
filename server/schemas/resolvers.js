@@ -32,7 +32,7 @@ const resolvers = {
     },
     me: async (_, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate('friends');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -78,6 +78,22 @@ const resolvers = {
       })
     
       return newArray
+    },
+    myFriends: async (_, args, context) => {
+      const myFriends = await User.findOne({ _id: context.user._id }).populate('friends')
+      console.log("user:", myFriends)
+
+      for (const [key, value] of Object.entries(myFriends)) {
+        console.log(`${key}: ${value}`);
+      }
+      // const friends = myFriends.friends
+      // const newArray = myFriends.map((user)=>{
+      //   const {friends} = user;
+      //   // console.log('friends:', friends)
+      //   return friends
+      // })
+      // console.log("new friend array:", newArray)
+      return myFriends
     },
   },
 

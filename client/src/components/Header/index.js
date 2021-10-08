@@ -24,10 +24,10 @@ const Header = () => {
             Home
           </Link>
           <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/profile">
-            {Auth.getProfile().data.username}'s profile
+            {Auth.getProfile().data.username}'s Profile
           </Link>
           <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/friends">
-            myFriends
+            My Friends
           </Link>
           <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/search">
             Search
