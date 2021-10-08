@@ -85,6 +85,10 @@ const SlateById = () => {
         console.error(error);
       }
     }
+
+  if (!Auth.loggedIn()) {
+    window.location.replace('/')
+  }
   
   if (loading) {
     <>

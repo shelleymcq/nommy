@@ -129,7 +129,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     addRestaurant: async (parent, { restaurantId, name,  category, image, link, distance, slateId }, context) => {
-      // if (context.user) {
+      if (context.user) {
         // CREATE THE RESTAURANT IN DATABASE FROM THE API DATA
         const restaurant = await Restaurant.create({
           restaurantId,
@@ -154,12 +154,12 @@ const resolvers = {
         console.log("updatedSlate:",updatedSlate)
         // RETURN THE UPDATED SLATE WITH RESTAURANT ADDED
         return updatedSlate.save();
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     // Make it so a logged in user can only remove a book from their own profile
     removeRestaurant: async (parent, { restaurantId, slateId }, context) => {
-      // if (context.user) {
+      if (context.user) {
         // REMOVE THE SELECTED RESTAURANT FROM THE DATABASE
         const removedRestaurant = await Restaurant.findOneAndDelete(
           { restaurantId }
@@ -170,9 +170,9 @@ const resolvers = {
         const updatedSlate = await Slate.findOne({_id: slateId}).populate('restaurants');
           
         return updatedSlate;
-      // }
+      }
       // THROW ERROR IF USER NOT LOGGED IN
-      // throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
     removeSlate: async (parent, args, context) => {
       if (context.user) {

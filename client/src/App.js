@@ -12,8 +12,6 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile/Profile';
-import Slate from './pages/Slate';
-import Item from './pages/Item'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FriendPage from './pages/FriendPage';
@@ -65,12 +63,6 @@ function App() {
             </Route>
             <Route exact path="/profile">
               <Profile />
-            </Route>
-            <Route exact path="/slate">
-              <Slate />
-            </Route>
-            <Route exact path="/item">
-              <Item />
             </Route>
             <Route exact path="/search">
               <SearchRestaurants />

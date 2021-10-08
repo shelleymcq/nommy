@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Card, Button, Modal, Form } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import { useMutation } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
-import { useHistory } from 'react-router-dom'
+
 // Utilities
 import { QUERY_MY_SLATES, QUERY_ME } from '../../utils/queries';
 

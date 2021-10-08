@@ -1,8 +1,8 @@
 // Node Modules
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 // Utilities
-import { QUERY_MY_RANDOM_RESTAURANT, QUERY_SUGGESTIONS } from '../../utils/queries';
+import { QUERY_MY_RANDOM_RESTAURANT } from '../../utils/queries';
 import { API_SEARCH } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 // Components

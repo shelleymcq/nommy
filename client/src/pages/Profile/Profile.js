@@ -90,17 +90,6 @@ const Profile = () => {
     setSlateToAdd('');
   }
 
-  const renderCurrentUserInfo = () => {
-    if (id) return null;
-    return (
-      <ul>
-        <li>username: {user.username}</li>
-        <li>email: {user.email}</li>
-        <li>{user.avatar}</li>
-      </ul>
-    );
-  }
-
   return (
     <div className='profile-card'>
       <div className="flex-row justify-center mb-3">

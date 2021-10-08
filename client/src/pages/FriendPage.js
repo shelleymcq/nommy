@@ -4,9 +4,19 @@ import Olivia from '../assets/img/img-2.png';
 import Charlotte from '../assets/img/img-3.png';
 import Rob from '../assets/img/img-4.png';
 import Friend from '../components/Friend/Friend';
+import Auth from '../utils/auth'
 // import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 function FriendPage(props) {
+  if (!Auth.loggedIn()) {
+    return (
+      <h4>
+        You need to be logged in to see this. Use the navigation links above to
+        sign up or log in!
+      </h4>
+    );
+  }
+  
   return (
     <div className="Wrapper">
       <div className="cards">
