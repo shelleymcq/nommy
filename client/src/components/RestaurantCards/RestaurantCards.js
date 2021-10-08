@@ -136,7 +136,7 @@ const RestaurantCards = ({restaurants}) => {
                                         data-distance={restaurant.distance}
                                         onClick={(event) => renderSavingOptions(event)}
                                     >
-                                        &#10084;
+                                        &#129293;
                                     </Button>
                                 )}
                             </Card.Body>
