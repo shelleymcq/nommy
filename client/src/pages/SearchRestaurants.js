@@ -54,8 +54,6 @@ const SearchRestaurants = () => {
         <Container>
           <h1>Hungry? Get Inspired!</h1>
           <Form onSubmit={(event)=> handleFormSubmit(event)}>
-            <Form.Row>
-              <Col >
                 <Form.Control
                   name="searchInput"
                   value={searchInput}
@@ -64,13 +62,9 @@ const SearchRestaurants = () => {
                   size="lg"
                   placeholder="Search for restaurants"
                 />
-              </Col>
-              <Col>
                 <Button className='btn-primary outline-delete m-4' type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
-              </Col>
-            </Form.Row>
           </Form>
         </Container>
       </Jumbotron>
