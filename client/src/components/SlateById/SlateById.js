@@ -123,11 +123,14 @@ const SlateById = () => {
           null
           }
       </div>
+      {Auth.getProfile().data.username === returnedSlate.slateCreator ?
       <div>
         <button className="btn btn-lg btn-primary m-2 outline-delete mt-5" onClick={() => goToSearch()}>
           Add Restaurants
         </button>
       </div>
+      :
+      null}
       {restaurants ? 
         <RestaurantCards restaurants={restaurants} />
         : null
