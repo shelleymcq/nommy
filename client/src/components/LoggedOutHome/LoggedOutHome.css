@@ -7,5 +7,10 @@
 .slate-header h1 {
   padding-bottom: 1rem;
   font-style: italic;
-  font-size: 4rem;
+  font-size: 3rem;
+}
+
+.slate-header h4 {
+  font-style: italic;
+  font-size: 1rem;
 }
