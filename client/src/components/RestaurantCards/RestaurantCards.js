@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Card, Button, Modal, Form } from 'react-bootstrap';
 import Auth from '../../utils/auth';
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import { useMutation } from '@apollo/client';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_RESTAURANT } from '../../utils/mutations';
+import { useHistory } from 'react-router-dom'
 // Utilities
 import { QUERY_MY_SLATES, QUERY_ME } from '../../utils/queries';
 
@@ -13,7 +14,6 @@ import './RestaurantCards.css'
 const RestaurantCards = ({restaurants}) => {
     const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
-    // const [showDuplicateSlateMsg, setShowDuplicateSlateMsg] = useState(false);
     const [restaurantToSave, setRestaurantToSave] = useState({});
     const [newSlateId, setNewSlateId] = useState('');
     const [newSlateName, setNewSlateName] = useState('');
@@ -26,7 +26,6 @@ const RestaurantCards = ({restaurants}) => {
     const slatesRes = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: myUserData.username }});
 
     const allMySlates = slatesRes.data?.mySlates || [];
-    console.log('rest cards all slates:', allMySlates)
 
     const renderSavingOptions = (event) => {
         const restaurantData = {

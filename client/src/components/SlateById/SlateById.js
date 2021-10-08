@@ -35,6 +35,10 @@ const SlateById = () => {
         history.go(0)
     }
 
+    const goToSearch = () => {
+      history.push(`/search`);
+    }
+
     const handleEditClick = (event) => {
       setShowSlateModal(true)
     }
@@ -115,11 +119,15 @@ const SlateById = () => {
           null
           }
       </div>
-      <div>{restaurants ? 
       <div>
-        <RestaurantCards restaurants={restaurants} />
+        <button className="btn btn-lg btn-primary m-2 outline-delete mt-5" onClick={() => goToSearch()}>
+          Add Restaurants
+        </button>
       </div>
-      : null}</div>
+      {restaurants ? 
+        <RestaurantCards restaurants={restaurants} />
+        : null
+      }
       <Modal show={showSlateModal} onHide={() => handleClose()}>
           <Modal.Header closeButton onClick={()=>handleClose()}>
           <Modal.Title>EDIT SLATE NAME:</Modal.Title>

@@ -12,11 +12,15 @@ const Header = () => {
     window.location.replace('/')
   };
 
+  const runApi = ()=>{
+    window.location.replace('/')
+  }
+
   const renderControls = () => {
     if (Auth.loggedIn()) {
       return (
         <div className='navbar-nav ml-auto'>
-          <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/">
+          <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/" onClick={()=>runApi()}>
             Home
           </Link>
           <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/profile">
@@ -60,8 +64,8 @@ const Header = () => {
             {renderControls()}
           </div>
         </nav>
-      /* </nav>
-    </div> */
+    //   </nav>
+    // </div>
 )
 };
 
