@@ -5,8 +5,8 @@ import './Footer.css'
 const Footer = () => {
 
   return (
-    <footer className="footer">
-      <div className="container">
+    <footer className="footer w-100 mt-auto p-2">
+      <div className="container text-center mb-2">
         <h4>
           Made with
           {' '}
