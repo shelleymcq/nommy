@@ -9,7 +9,8 @@ import { ADD_RESTAURANT } from '../../utils/mutations';
 // Utilities
 import { QUERY_MY_SLATES, QUERY_ME } from '../../utils/queries';
 
-import './RestaurantCards.css'
+import './RestaurantCards.css';
+import Nommy from '../../assets/img/nommy.jpg';
 
 const RestaurantCards = ({restaurants}) => {
     const [showModal, setShowModal] = useState(false);
@@ -106,7 +107,20 @@ const RestaurantCards = ({restaurants}) => {
                                         alt={`Highlight for ${restaurant.name}`}
                                     />
                                 </a>
-                            ) : null}
+                            ) : 
+                                <a 
+                                    href={restaurant.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Card.Img 
+                                        className="card-image"
+                                        variant="top" 
+                                        src={Nommy}
+                                        alt={`no image available for this restaurant`}
+                                    />
+                                </a>
+                            }
                             <Card.Body>
                                 <Card.Title><a className="restaurant-link" href={restaurant.link} target="_blank" rel="noopener noreferrer">{restaurant.name}</a></Card.Title>
                                 <p className='small-text'>Distance: {restaurant.distance} miles</p>
