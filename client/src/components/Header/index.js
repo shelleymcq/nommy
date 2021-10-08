@@ -58,7 +58,7 @@ const Header = () => {
             <img src={NewLogo} alt="logo" height="55px" width="150px" />
           </a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon button-color"></span>
+            <span className="navbar-toggler-icon navbar-dark"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {renderControls()}
