@@ -23,14 +23,6 @@ const LoggedOutHome = () => {
       <div>
         <RestaurantCards restaurants={randomSlate.restaurants} />
       </div>
-      // return(
-      //   {restaurantsArray}
-      //   <ul>
-      //     <li>{randomSlate.restaurants[0].name}</li>
-        
-      //   </ul>
-      // )
-      
       : null}</div>
       
     </main>

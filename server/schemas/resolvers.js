@@ -50,8 +50,8 @@ const resolvers = {
     },
     randomSlate: async () => {
       const slates = await Slate.find().populate('restaurants');
-      const chosenSlate = slates[Math.floor(Math.random() * slates.length)]
-      // console.log("chosenSlate:", chosenSlate);
+      const nonemptySlates = slates.filter(slate => slate.restaurants.length > 1)
+      const chosenSlate = nonemptySlates[Math.floor(Math.random() * nonemptySlates.length)]
       return chosenSlate
     },
     myRandomRestaurant: async (_, args, context) => {
@@ -257,31 +257,17 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     apiSearch: async (_, args, context) => {
-      console.log("args:", args)
       try {
-      const apiResponse = await API.search(args.searchInput, args.zipcode)
-      const businesses = apiResponse.data.businesses;
-      const restaurantData = businesses.map((restaurant) => ({
-        restaurantId: restaurant.id,
-        name: restaurant.name,
-        link: restaurant.url,
-        image: restaurant.image_url || '',
-        distance: (restaurant.distance* 0.000621).toFixed(2),
-        category: restaurant.categories[0].title
+        const apiResponse = await API.search(args.searchInput, args.zipcode)
+        const businesses = apiResponse.data.businesses;
+        const restaurantData = businesses.map((restaurant) => ({
+          restaurantId: restaurant.id,
+          name: restaurant.name,
+          link: restaurant.url,
+          image: restaurant.image_url || '',
+          distance: (restaurant.distance* 0.000621).toFixed(2),
+          category: restaurant.categories[0].title
       }));
-        console.log("restaurant data from server:", restaurantData[0])
-
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          // using an ID from my seeds for testing purposes on GraphQL
-          // { _id: "6157e2ac9a561b7ec8a741bb"},
-          { lastSearch: args.searchInput },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        console.log("updated user", updatedUser)
         return restaurantData
       }catch(err) {
         console.log(err)
