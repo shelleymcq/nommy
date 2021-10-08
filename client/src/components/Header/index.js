@@ -16,19 +16,19 @@ const Header = () => {
     if (Auth.loggedIn()) {
       return (
         <div className='navbar-nav ml-auto'>
-          <Link className="btn btn-outline-light m-2 nav-color" to="/">
+          <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/">
             Home
           </Link>
-          <Link className="btn btn-outline-light m-2 nav-color" to="/profile">
+          <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/profile">
             {Auth.getProfile().data.username}'s profile
           </Link>
-          <Link className="btn btn-outline-light m-2 nav-color" to="/friends">
+          <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/friends">
             myFriends
           </Link>
-          <Link className="btn btn-outline-light m-2 nav-color" to="/search">
+          <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/search">
             Search
           </Link>
-          <button className="btn btn-outline-light m-2 nav-color" onClick={logout}>
+          <button className="btn btn-outline-light m-2 nav-color nav-item" onClick={logout}>
             Logout
           </button>
         </div>
@@ -36,10 +36,10 @@ const Header = () => {
     }
     return (
       <div className='navbar-nav ml-auto'>
-        <Link className="btn btn-outline-light m-2 nav-color" to="/login">
+        <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/login">
           Login
         </Link>
-        <Link className="btn btn-outline-light m-2 nav-color" to="/signup">
+        <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/signup">
           Signup
         </Link>
       </div>
@@ -47,21 +47,21 @@ const Header = () => {
   };
 
   return (
-    <div className="navBtn">
-      <nav className="navbar navbar-expand-lg">
-        <div className="container-fluid">
+    // <div className="navBtn">
+    //   <nav className="navbar navbar-expand-lg">
+        <nav className="container-fluid navbar navbar-expand-lg">
           <a href="/">
             <img src={NewLogo} alt="logo" height="55px" width="150px" />
           </a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon button-color"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {renderControls()}
           </div>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      /* </nav>
+    </div> */
 )
 };
 
