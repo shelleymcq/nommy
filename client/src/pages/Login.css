@@ -1,0 +1,13 @@
+.loginPopup p {
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+}
+
+.loginLink{
+    color: #000000;
+    text-decoration: none;
+}
+
+.loginLink:active{
+    text-decoration: underline;
+}
