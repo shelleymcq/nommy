@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import FriendPage from './pages/FriendPage';
 import SearchRestaurants from './pages/SearchRestaurants';
 import SlateById from './components/SlateById/SlateById';
+import ProfileById from './pages/Profile/ProfileById'
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -62,6 +63,9 @@ function App() {
               <FriendPage />
             </Route>
             <Route exact path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/profile/:id">
               <Profile />
             </Route>
             <Route exact path="/search">

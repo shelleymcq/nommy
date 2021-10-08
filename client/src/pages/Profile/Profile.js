@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
-import './Profile.css' 
+import './Profile.css'
 
 // Utilities
 import { QUERY_USER, QUERY_ME, QUERY_MY_SLATES, QUERY_SLATE_IMAGE } from '../../utils/queries';
@@ -17,12 +17,14 @@ const Profile = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [slateToAdd, setSlateToAdd] = useState('');
   const [showWarning, setShowWarning] = useState(false);
+  const [showAddSlate, setShowAddSlate] = useState(true)
   // Get current user
   const { loading, data } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
   });
   const user = data?.me || data?.user || {};
   console.log("my zip:", user.zipcode)
+  console.log("profile id:", id)
   const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }});
   const mySlates = slatesResponse.data?.mySlates || [];
   // const mySlates = slatesResponse.data?.mySlates || [];
@@ -35,7 +37,6 @@ const Profile = () => {
   // if(referringURL === 'slates') {
   //   window.location.reload()
   // }
-
 
   if (error) console.log(error);
 
@@ -97,9 +98,14 @@ const Profile = () => {
         {/* <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5"> */}
           Viewing {user.username}'s profile<span>&nbsp;{user.avatar}</span>
           <div>
+            {!id ?
             <button className="btn btn-lg btn-primary m-2 outline-delete mt-5" onClick={() => renderModal()}>
-              Add Slate
+            Add Slate
             </button>
+          :
+            null
+            }
+            
           </div>
         </h2>
         <div>
