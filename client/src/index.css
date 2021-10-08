@@ -984,7 +984,7 @@ a:hover {
   border: 1px solid transparent;
   outline: none;
   color: #1a1a1a;
-  background-color: #aeaeae;
+  background-color: transparent;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
