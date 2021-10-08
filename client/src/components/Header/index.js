@@ -16,19 +16,19 @@ const Header = () => {
     if (Auth.loggedIn()) {
       return (
         <div className='navbar-nav ml-auto'>
-          <Link className="btn btn-outline-light m-2" to="/">
+          <Link className="btn btn-outline-light m-2 nav-color" to="/">
             Home
           </Link>
-          <Link className="btn btn-outline-light m-2" to="/profile">
+          <Link className="btn btn-outline-light m-2 nav-color" to="/profile">
             {Auth.getProfile().data.username}'s profile
           </Link>
-          <Link className="btn btn-outline-light m-2" to="/friends">
+          <Link className="btn btn-outline-light m-2 nav-color" to="/friends">
             myFriends
           </Link>
-          <Link className="btn btn-outline-light m-2" to="/search">
+          <Link className="btn btn-outline-light m-2 nav-color" to="/search">
             Search
           </Link>
-          <button className="btn btn-outline-light m-2" onClick={logout}>
+          <button className="btn btn-outline-light m-2 nav-color" onClick={logout}>
             Logout
           </button>
         </div>
@@ -36,10 +36,10 @@ const Header = () => {
     }
     return (
       <div className='navbar-nav ml-auto'>
-        <Link className="btn btn-outline-light m-2" to="/login">
+        <Link className="btn btn-outline-light m-2 nav-color" to="/login">
           Login
         </Link>
-        <Link className="btn btn-outline-light m-2" to="/signup">
+        <Link className="btn btn-outline-light m-2 nav-color" to="/signup">
           Signup
         </Link>
       </div>
@@ -54,7 +54,7 @@ const Header = () => {
             <img src={NewLogo} alt="logo" height="55px" width="150px" />
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon button-color"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {renderControls()}
@@ -62,7 +62,8 @@ const Header = () => {
         </div>
       </nav>
     </div>
-  )
+)
 };
+
 
 export default Header;
