@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import './Login.css'
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
@@ -46,10 +46,12 @@ const Signup = () => {
           <h4 className="card-header bg-black text-light p-2">Sign Up</h4>
           <div className="card-body">
             {data ? (
+              <div className='loginPopup'>
               <p>
                 Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                <Link className='loginLink' to="/">back to the homepage.</Link>
               </p>
+              </div>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
