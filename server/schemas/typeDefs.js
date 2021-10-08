@@ -47,6 +47,7 @@ const typeDefs = gql`
     myRandomRestaurant: Restaurant
     suggestions(category: String!): [Restaurant]
     slateImage(slateCreator: String!): [Restaurant]
+    myFriends: [User]
   }
 
   type Mutation {

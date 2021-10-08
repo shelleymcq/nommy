@@ -1,13 +1,16 @@
-// import './App.css';
-import Ed from '../assets/img/img-1.png';
-import Olivia from '../assets/img/img-2.png';
-import Charlotte from '../assets/img/img-3.png';
-import Rob from '../assets/img/img-4.png';
-import Friend from '../components/Friend/Friend';
+import React from 'react';
 import Auth from '../utils/auth'
-// import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../utils/queries';
 
 function FriendPage(props) {
+  const { loading, data } = useQuery(QUERY_ME)
+  const myFriends = data?.me.friends || [];
+
+  const goToFriendProfile = (_id) => {
+    window.location.replace(`/profile/${_id}`)
+  }
+
   if (!Auth.loggedIn()) {
     return (
       <h4>
@@ -16,26 +19,24 @@ function FriendPage(props) {
       </h4>
     );
   }
+
+  if (loading ) {
+    return <h4>Loading...</h4>;
+  }
   
   return (
     <div className="Wrapper">
       <div className="cards">
-        <Friend
-          img={ Ed }
-          name="Ed"
-          description="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups." />
-        <Friend
-          img={ Olivia  }
-          name="Olivia "
-          description="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups." />
-        <Friend
-          img={ Charlotte }
-          name="Charlotte"
-          description="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups." />
-        <Friend
-          img={ Rob }
-          name="Rob"
-          description="Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups." />
+        {myFriends.map((friend)=>{
+          return(
+            <>
+            <button className="btn btn-lg btn-primary m-2 outline-delete mt-5" onClick={()=>goToFriendProfile(friend._id)}>
+            {friend.avatar}{' '}{friend.username}
+            </button>
+            </>
+          )
+        })
+        }
       </div>
     </div>
   );

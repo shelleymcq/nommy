@@ -135,6 +135,9 @@ export const QUERY_ME = gql`
       friends{
         _id
         username
+        email
+        avatar
+        zipcode
       }
     }
   }
@@ -247,6 +250,18 @@ export const QUERY_SLATE_IMAGE = gql`
         link
         image
         distance
+    }
+  }
+`;
+
+export const QUERY_MY_FRIENDS = gql`
+  query myFriends {
+    myFriends {
+        _id
+        username
+        email
+        avatar
+        zipcode
     }
   }
 `;
