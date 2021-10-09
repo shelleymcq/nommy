@@ -166,5 +166,5 @@ Anh Cu, Shelley McHardy, Corey Parker, Wilson Sous, & Meredith Wall
 * https://github.com/merewall
 
 ## Links
-* [Deployed application](https://toolin-around.herokuapp.com/)
-* [GitHub Repo](https://github.com/shelleymcq/nommyhttps://github.com/merewall/Toolin-Around)
+* [Deployed application](https://nommy-restaurants.herokuapp.com/)
+* [GitHub Repo](https://github.com/shelleymcq/nommy)
