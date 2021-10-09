@@ -1,5 +1,5 @@
 // Node Modules
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 // Utilities
@@ -19,7 +19,7 @@ const SlateById = () => {
         variables: { id },
       });
     const returnedSlate = data?.slate || [];
-    const restaurants = returnedSlate.restaurants;
+    const restaurants = data?.slate.restaurants || [];
     const [showSlateModal, setShowSlateModal] = useState(false);
     const [updatedName, setUpdatedName] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -59,8 +59,9 @@ const SlateById = () => {
         editSlate({
             variables: { _id: id, name: updatedName }
         });
-
-        window.location.reload();
+        
+        setShowSlateModal(false)
+        window.location.reload()
       } catch (error) {
         console.error(error);
       }
@@ -93,8 +94,6 @@ const SlateById = () => {
         <h1>Loading...</h1>
     </>
   }
-
-  console.log('restaurants:', restaurants)
 
   return (
     <main>

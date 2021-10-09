@@ -244,8 +244,8 @@ const resolvers = {
             runValidators: true,
           }
         ).populate('restaurants')
-        
-        return updatedSlate
+        console.log(updatedSlate)
+        return updatedSlate.save()
       }
       // THROW ERROR IF USER NOT LOGGED IN
       throw new AuthenticationError('You need to be logged in!');
