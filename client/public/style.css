@@ -33,3 +33,14 @@
 .navbar-toggler {
     border: 2px solid #f8f9fa !important;
 }
+
+@media screen and (max-width: 992px) {
+
+    .m-2 {
+        width: 90% !important;
+    }
+
+}
+
+
+
