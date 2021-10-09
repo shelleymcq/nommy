@@ -135,19 +135,26 @@ _Slate View:_
 
 
 ## Technologies
+* Yelp Fusion API
+* Mongoose
+* Express
+* React
 * JavaScript
 * Node.js
+* Graphql
+* React Bootstrap
+* Axios
+* Apollo Server Express
 * Express.js
 * MySQL
 * Sequelize
 * Bcrypt
-* 
-* 
-* 
+* Jsonwebtoken
 ## Next Steps
-* 
-* 
-* 
+* Ability to search for and add friends
+* Add your address to you profile to have a more acurate search than just zip code based searches
+* "Add This to Nommy!" button for external sites
+* Links to the actual restaurant instead of Yelp
 
 ## Contributors
 Anh Cu, Shelley McHardy, Corey Parker, Wilson Sous, & Meredith Wall
