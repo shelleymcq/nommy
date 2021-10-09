@@ -40,7 +40,26 @@
         width: 90% !important;
     }
 
+    h1 {
+        font-size: 32px !important;
+    }
+
+    h2 {
+        font-size: 24px !important;
+    }
+
 }
 
+
+@media screen and (max-width: 768px) {
+
+    h1 {
+        font-size: 26px !important;
+    }
+
+    h2 {
+        font-size: 20px !important;
+    }
+}
 
 

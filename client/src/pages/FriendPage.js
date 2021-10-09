@@ -137,7 +137,7 @@ function FriendPage(props) {
             variant="primary outline-delete"
             onClick={() => handleAddFriend()}
           >
-            Add {friendNameToAdd}
+            Add
           </Button>
         </Modal.Footer>
       </Modal>
