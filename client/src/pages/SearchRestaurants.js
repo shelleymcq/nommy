@@ -52,10 +52,13 @@ const SearchRestaurants = () => {
     <>
       <Jumbotron fluid className="search">
         <Container>
+          <div className='searchTitle'>
           <h1>Hungry? Get Inspired!</h1>
+          </div>
+
           <Form onSubmit={(event)=> handleFormSubmit(event)}>
             <Form.Row>
-              <Col >
+              <Col className='searchCol'> 
                 <Form.Control
                   name="searchInput"
                   value={searchInput}
@@ -65,13 +68,13 @@ const SearchRestaurants = () => {
                   placeholder="Search for restaurants"
                 />
               </Col>
-              <Col>
+            </Form.Row>
+          </Form>
+          <Col>
                 <Button className='btn-primary outline-delete m-4' type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
               </Col>
-            </Form.Row>
-          </Form>
         </Container>
       </Jumbotron>
 
