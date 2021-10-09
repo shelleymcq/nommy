@@ -52,7 +52,10 @@ const SearchRestaurants = () => {
     <>
       <Jumbotron fluid className="search">
         <Container>
+          <div className='searchTitle'>
           <h1>Hungry? Get Inspired!</h1>
+          </div>
+
           <Form onSubmit={(event)=> handleFormSubmit(event)}>
                 <Form.Control
                   name="searchInput"
