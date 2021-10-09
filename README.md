@@ -132,22 +132,23 @@ _Slate View:_
 
 ![slate](./client/src/assets/img/slate.png)
 
-
-
 ## Technologies
-* JavaScript
+* Yelp Fusion API
+* Mongoose
+* Express
+* React
 * Node.js
-* Express.js
-* MySQL
-* Sequelize
+* Graphql
+* React Bootstrap
+* Axios
+* Apollo Server Express
 * Bcrypt
-* 
-* 
-* 
+* Jsonwebtoken
 ## Next Steps
-* 
-* 
-* 
+* Ability to search for and add friends
+* Add your address to you profile to have a more acurate search than just zip code based searches
+* "Add This to Nommy!" button for external sites
+* Links to the actual restaurant instead of Yelp
 
 ## Contributors
 Anh Cu, Shelley McHardy, Corey Parker, Wilson Sous, & Meredith Wall
@@ -159,5 +160,5 @@ Anh Cu, Shelley McHardy, Corey Parker, Wilson Sous, & Meredith Wall
 * https://github.com/merewall
 
 ## Links
-* [Deployed application](https://toolin-around.herokuapp.com/)
+* [Deployed application](Nommy-restaurants.herokuapp.com )
 * [GitHub Repo](https://github.com/shelleymcq/nommyhttps://github.com/merewall/Toolin-Around)

@@ -19,7 +19,7 @@ const Header = () => {
   const renderControls = () => {
     if (Auth.loggedIn()) {
       return (
-        <div className='navbar-nav ml-auto'>
+        <div className='navbar-nav ml-auto' id="navbar-mobile">
           <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/" onClick={()=>runApi()}>
             Home
           </Link>
@@ -39,7 +39,7 @@ const Header = () => {
       );
     }
     return (
-      <div className='navbar-nav ml-auto'>
+      <div className='navbar-nav ml-auto' id="navbar-mobile">
         <Link className="btn btn-outline-light m-2 nav-color nav-item" to="/login">
           Login
         </Link>
