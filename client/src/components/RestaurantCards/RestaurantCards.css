@@ -40,3 +40,19 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 992px) {
+  .restaurant-card {
+    width: 46%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .restaurant-card {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
