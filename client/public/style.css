@@ -34,6 +34,10 @@
     border: 2px solid #f8f9fa !important;
 }
 
+.slate-header h2 {
+    padding-top: 16px !important;
+}
+
 @media screen and (max-width: 992px) {
 
     .m-2 {
