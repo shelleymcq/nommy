@@ -5,8 +5,6 @@ import Auth from '../../utils/auth'
 import './SlateCards.css'
 
 const SlateCards = ({slates, restaurants}) => {
-    // console.log("slate cards restaurant props:", restaurants)
-    // console.log("slates' names:", slates)
     const history = useHistory();
     
     const redirect = (idPath) => {
@@ -57,7 +55,7 @@ const SlateCards = ({slates, restaurants}) => {
                                         className='btn-block btn-danger'
                                         // onClick={() => handleSaveBook(book.bookId)}
                                     >
-                                        &#10084;
+                                        <i className="fas fa-heart"></i>
                                     </Button>
                                     :
                                     null

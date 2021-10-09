@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Jumbotron, Container, Col, Form, Button,
+  Jumbotron, Container, Form, Button,
 } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { API_SEARCH } from '../utils/mutations'
@@ -36,6 +36,7 @@ const SearchRestaurants = () => {
       setSearchInput('');
     } catch(err) {
       console.error(err);
+      
     }
   };
 

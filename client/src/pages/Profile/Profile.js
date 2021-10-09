@@ -17,26 +17,17 @@ const Profile = () => {
   const [modalDisplay, setModalDisplay] = useState(false);
   const [slateToAdd, setSlateToAdd] = useState('');
   const [showWarning, setShowWarning] = useState(false);
-  const [showAddSlate, setShowAddSlate] = useState(true)
+  
   // Get current user
   const { loading, data } = useQuery(id ? QUERY_USER : QUERY_ME, {
     variables: { id },
   });
   const user = data?.me || data?.user || {};
-  console.log("my zip:", user.zipcode)
-  console.log("profile id:", id)
   const slatesResponse = useQuery(QUERY_MY_SLATES, { variables: { slateCreator: user.username }});
   const mySlates = slatesResponse.data?.mySlates || [];
-  // const mySlates = slatesResponse.data?.mySlates || [];
   const slatesRestaurantResponse = useQuery(QUERY_SLATE_IMAGE, { variables: { slateCreator: user.username }});
   const myRestaurants = slatesRestaurantResponse.data?.slateImage || [];  
   const [addSlate, { error }] = useMutation(ADD_SLATE);
-
-  // const referringURL = document.referrer.split('/').slice(3,4).toString()
-  
-  // if(referringURL === 'slates') {
-  //   window.location.reload()
-  // }
 
   if (error) console.log(error);
 
@@ -95,7 +86,6 @@ const Profile = () => {
     <div className='profile-card'>
       <div className="flex-row justify-center mb-3">
         <h2 className="col-12 col-md-10 text-light p-3 mb-1">
-        {/* <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5"> */}
           Viewing {user.username}'s profile<span>&nbsp;{user.avatar}</span>
           <div>
             {!id ?
@@ -108,6 +98,16 @@ const Profile = () => {
             
           </div>
         </h2>
+        {mySlates.length < 1 ?
+        <>
+        <div className="no-slates-yet-div">
+          <h4>No slates have been added yet!</h4>
+        </div>
+        </>
+        :
+        null
+        }
+
         <div>
           <SlateCards slates={mySlates} restaurants={myRestaurants}/>
         </div>
