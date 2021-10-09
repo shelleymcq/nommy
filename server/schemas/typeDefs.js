@@ -1,3 +1,4 @@
+// BRING IN GRAPHQL FOR APOLLO-SERVER-EXPRESS
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -54,16 +55,12 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!, avatar: String!, zipcode: String): Auth
     login(email: String!, password: String!): Auth
-    
     addSlate(name: String!): User
     addRestaurant(restaurantId: String!, category: String, name: String!, image: String, distance: String, link: String, slateId: String): Slate
     addFriend(_id: String!): User
-
     removeRestaurant(restaurantId: String!, slateId: String): Slate
-    # removeSlate(_id: String!): User
     removeSlate(_id: String!): Slate
     removeFriend(_id: String!): User
-
     editSlate(_id: String!, name: String!): Slate
     apiSearch(searchInput: String!, zipcode: String!): [Restaurant]
   }

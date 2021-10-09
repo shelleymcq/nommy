@@ -1,20 +1,27 @@
+// BRING IN REACT, USESTATE, AND REACT-ROUTER-DOM MODULES
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+// CUSTOM STYLESHEET
 import './Login.css'
+// BRING IN MUTATION FOR SIGNING UP (ADDING) A USER
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
-
+// BRING IN AUTHENTICATION SERVICES FUNCTIONS
 import Auth from '../utils/auth';
 
 const Signup = () => {
+  // SET STATE FOR FORM INPUT FIELDS
   const [formState, setFormState] = useState({
     username: '',
     email: '',
     password: '',
     avatar: '',
   });
+
+  // USE MUTATION HOOK FOR ADDING A USER AND GIVING THEM A TOKEN
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
+  // UPON FORM INPUT CHANGES, SET STATE FOR FORM DATA TO THE USER'S INPUTS
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -24,20 +31,24 @@ const Signup = () => {
     });
   };
 
+  // HANDLE SIGN-UP FORM SUBMISSION
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    // ADD USER TO DATA BASE GIVEN USER'S FORM INPUTS & GIVE A TOKEN
     try {
       const { data } = await addUser({
         variables: { ...formState },
       });
 
+      // SAVE USER TOKEN INFO TO LOCAL STORAGE
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
   };
 
+  // SIGN-UP FORM
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
@@ -46,10 +57,10 @@ const Signup = () => {
           <div className="card-body">
             {data ? (
               <div className='loginPopup'>
-              <p>
-                Success! You may now head{' '}
-                <Link className='loginLink' to="/">back to the homepage.</Link>
-              </p>
+                <p>
+                  Success! You may now head{' '}
+                  <Link className='loginLink' to="/">back to the homepage.</Link>
+                </p>
               </div>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -105,7 +116,6 @@ const Signup = () => {
                         <option value="&#x1F4AF;">&#x1F4AF;</option>
                     </select>                    
                 </div>
-                {/* <Modal>Choose Avatar</Modal> */}
                   <br />
                   
                 <button

@@ -1,11 +1,18 @@
+// BRING IN REACT MODULES
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// BRING IN BOOTSTRAP AND STYLESHEET
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-// import Friend from './components/Friend/Friend';
 import 'bootstrap/dist/css/bootstrap.css';
 
+// BRING IN APP COMPONENT
+import App from './App';
+
+// WEB VITALS
+import reportWebVitals from './reportWebVitals';
+
+// RENDER REACT APP IN ROOT
 ReactDOM.render(
   <React.StrictMode>
     <App />
