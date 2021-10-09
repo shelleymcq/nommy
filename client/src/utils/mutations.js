@@ -76,20 +76,6 @@ export const REMOVE_RESTAURANT = gql`
 export const REMOVE_SLATE = gql`
   mutation removeSlate($_id: String!) {
     removeSlate(_id: $_id) {
-      # username
-      # email
-      # slates{
-      #   _id
-      #   name
-      #   restaurants{
-      #     restaurantId
-      #     name
-      #     category
-      #     link
-      #     image
-      #     distance
-      #   }
-      # }
       name
     }
   }

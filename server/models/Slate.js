@@ -1,5 +1,7 @@
+// BRING IN MONGOOSE SCHEMA AND MODEL MODULES
 const { Schema, model } = require('mongoose');
 
+// SLATE SCHEMA
 const slateSchema = new Schema({
   name: {
     type: String,
@@ -8,6 +10,7 @@ const slateSchema = new Schema({
     maxlength: 30,
     trim: true,
   },
+  // RESTAURANTS IS AN ARRAY OF DATA ADHERING TO RESTAURANT SCHEMA
   restaurants: [
     {
       type: Schema.Types.ObjectId,

@@ -1,36 +1,39 @@
+// BRING IN DB CONNECTION, MODELS, AND SEED JSON DATA
 const db = require('../config/connection');
 const { User, Slate, Restaurant } = require('../models');
 const userSeeds = require('./userSeeds.json');
 const slateSeeds = require('./slateSeeds.json');
 const restaurantSeeds = require('./restaurantSeeds.json');
 
+// CONNECT TO DATABASE
 db.once('open', async () => {
 
   try {
-    // clean database
+    // CLEAN DATABASE
     await Slate.deleteMany({});
     await Restaurant.deleteMany({});
     await User.deleteMany({});
 
-    // bulk create each model
+    // BULK CREATE EACH MODEL
     const slates = await Slate.create(slateSeeds);
     const restaurants = await Restaurant.create(restaurantSeeds);
     const users = await User.create(userSeeds);
 
     console.log('\n----- USERS SEEDED -----\n');
 
+    // RANDOMLY ADD EACH RESTAURANT IN THE DB TO A SLATE IN THE DB
     for (newRestaurant of restaurants) {
-      // randomly add each restaurant to a slate
       const tempSlate = slates[Math.floor(Math.random() * slates.length)];
       tempSlate.restaurants.push(newRestaurant._id);
       await tempSlate.save();
     };
+
     console.log('\n----- RESTAURANTS SEEDED -----\n');
 
     // FIND ALL NEWLY SEEDED AND POPULATED SLATES IN DB
     const seededSlates = await Slate.find({});
 
-    // PUSH EACH OF THE USER'S SLATES TO THEIR SLATES ARRAY
+    // PUSH EACH OF THE USER'S SLATES TO THEIR USER DATA
     for (newSeededSlate of seededSlates) {
       if(newSeededSlate.slateCreator === 'Cali'){
         let cali = users.find(user => user.username === 'Cali')
@@ -61,7 +64,7 @@ db.once('open', async () => {
 
     console.log('\n----- SLATES SEEDED -----\n');
 
-    // PUSH EACH OF THE USER'S SLATES TO THEIR SLATES ARRAY
+    // ADD EACH OF THE SEEDED USER'S TO EACH OTHER'S ARRAY OF FRIENDS
     for (user of users) {
       if(user.username === 'Cali'){
         let caliFriends = users.filter(user => user.username !== 'Cali')

@@ -1,6 +1,7 @@
-// BRING IN MONGOOSE SCHEMA MODULE 
+// BRING IN MONGOOSE SCHEMA AND MODEL MODULES
 const { Schema, model } = require('mongoose');
 
+// RESTAURANT SCHEMA
 const restaurantSchema = new Schema({
   name: {
     type: String,
@@ -12,7 +13,7 @@ const restaurantSchema = new Schema({
   image: {
     type: String,
   },
-  // saved restaurant id from Yelp API
+  // SAVED RESTAURANT ID FROM YELP API
   restaurantId: {
     type: String,
     required: true,
