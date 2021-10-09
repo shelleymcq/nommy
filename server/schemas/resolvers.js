@@ -45,7 +45,7 @@ const resolvers = {
     mySlates: async (_, args, context) => {
       
       const mySlates = await Slate.find({slateCreator: args.slateCreator}).populate('restaurants');
-      // console.log("mySlates in server:", mySlates)
+      
       return mySlates
     },
     randomSlate: async () => {
@@ -60,14 +60,14 @@ const resolvers = {
         const chosenSlate = mySlates[Math.floor(Math.random() * mySlates.length)]
         const slateRestaurants = chosenSlate.restaurants
         const chosenRestaurant = slateRestaurants[Math.floor(Math.random() * slateRestaurants.length)]
-        // console.log("chosenRestaurant:",chosenRestaurant)
+        
         return chosenRestaurant
       }
       throw new AuthenticationError('You need to be logged in!');
     },
     suggestions: async (_, args) => {
       const suggestions = await Restaurant.find({ category: args.category })
-      // console.log("suggestions:",suggestions)
+      
       return suggestions
     },
     slateImage: async (_, args, context) => {
@@ -81,19 +81,14 @@ const resolvers = {
     },
     myFriends: async (_, args, context) => {
       const myFriends = await User.findOne({ _id: context.user._id }).populate('friends')
-      console.log("user:", myFriends)
 
-      for (const [key, value] of Object.entries(myFriends)) {
-        console.log(`${key}: ${value}`);
-      }
-      // const friends = myFriends.friends
-      // const newArray = myFriends.map((user)=>{
-      //   const {friends} = user;
-      //   // console.log('friends:', friends)
-      //   return friends
-      // })
-      // console.log("new friend array:", newArray)
       return myFriends
+    },
+    nonFriends: async (_, args, context) => {
+      
+      const nonFriends = await User.find({ username: {$nin: args.friendNameArray} });
+      
+      return nonFriends
     },
   },
 
@@ -127,19 +122,14 @@ const resolvers = {
           slateCreator: context.user.username,
         });
 
-        // console.log("new slate:", slate._id)
-
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          // using an ID from my seeds for testing purposes on GraphQL
-          // { _id: "6157e2ac9a561b7ec8a741bb"},
           { $addToSet: { slates: {...slate} } },
           {
             new: true,
             runValidators: true,
           }
         ).populate('slates');
-        // console.log("updatedUser:",updatedUser)
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -156,8 +146,6 @@ const resolvers = {
           distance
         });
 
-        console.log("restaurant to create:", restaurant)
-
         // FIND THE SLATE AND ADD THE RESTAURANT TO IT
         const updatedSlate = await Slate.findOneAndUpdate(
           { _id: slateId},
@@ -167,7 +155,7 @@ const resolvers = {
             runValidators: true,
           }
         ).populate('restaurants');
-        console.log("updatedSlate:",updatedSlate)
+        
         // RETURN THE UPDATED SLATE WITH RESTAURANT ADDED
         return updatedSlate.save();
       }
@@ -180,7 +168,6 @@ const resolvers = {
         const removedRestaurant = await Restaurant.findOneAndDelete(
           { restaurantId }
         )
-        // console.log("removed restaurant:", removedRestaurant)
         
         // RETURN THE UPDATED SLATE
         const updatedSlate = await Slate.findOne({_id: slateId}).populate('restaurants');
@@ -202,18 +189,15 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     addFriend: async (parent, { _id }, context) => {
-      //if (context.user) {
+      if (context.user) {
         const friend = await User.findOne({
           _id
         });
 
-        console.log("new friend:", friend)
-        console.log("new friend:", friend.username)
-
         const updatedUser = await User.findOneAndUpdate(
-          // { _id: context.user._id },
+          { _id: context.user._id },
           // using an ID from my seeds for testing purposes on GraphQL
-          { _id: "6157e2ac9a561b7ec8a741bb"},
+          // { _id: "6157e2ac9a561b7ec8a741bb"},
           { $addToSet: { friends: {...friend} } },
           {
             new: true,
@@ -221,27 +205,21 @@ const resolvers = {
             // populate: { path: 'users' }
           }
         ).populate('friends');
-        // console.log("updatedUser:",updatedUser)
         return updatedUser;
-      //}
-      // throw new AuthenticationError('You need to be logged in!');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     removeFriend: async (parent, { _id }, context) => {
-      // if (context.user) {
+      if (context.user) {
         const friend = await User.findOne({ _id });
-
-        // console.log("friend to be removed:", friend)
         
         // RETURN THE UPDATED SLATE
         const updatedUser = await User.findOneAndUpdate(
-          // { _id: context.user._id },
-          // using an ID from my seeds for testing purposes on GraphQL
-          { _id: "6157e2ac9a561b7ec8a741bb"},
+          { _id: context.user._id },
           { $pull: { friends: friend._id } },
           {
             new: true,
             runValidators: true,
-            // populate: { path: 'users' }
           }
           ).populate('slates')
           .populate({
@@ -251,9 +229,9 @@ const resolvers = {
           .populate('friends');
           
         return updatedUser;
-      // }
+      }
       // THROW ERROR IF USER NOT LOGGED IN
-      // throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError('You need to be logged in!');
     },
     editSlate: async (parent, args, context) => {
       if (context.user) {
@@ -266,7 +244,7 @@ const resolvers = {
             runValidators: true,
           }
         ).populate('restaurants')
-        console.log("updatedSlate:", updatedSlate)
+        
         return updatedSlate
       }
       // THROW ERROR IF USER NOT LOGGED IN
@@ -287,6 +265,7 @@ const resolvers = {
         return restaurantData
       }catch(err) {
         console.log(err)
+        window.location.reload()
       }
     },
   }

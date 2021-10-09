@@ -65,8 +65,6 @@ const RestaurantCards = ({restaurants}) => {
         event.preventDefault();
         
         try {
-            // const selectedSlate = allMySlates.filter(slate => slate._id === newSlateId)
-            // console.log(selectedSlate.restaurants)
             addRestaurant({
                 variables: { ...restaurantToSave, slateId: newSlateId}
             });
@@ -136,7 +134,7 @@ const RestaurantCards = ({restaurants}) => {
                                         data-distance={restaurant.distance}
                                         onClick={(event) => renderSavingOptions(event)}
                                     >
-                                        &#129293;
+                                        <i className="fas fa-heart"></i>
                                     </Button>
                                 )}
                             </Card.Body>
@@ -163,10 +161,6 @@ const RestaurantCards = ({restaurants}) => {
                                 })}
                             </Form.Control>
                         </div>
-                        {/* {showDuplicateSlateMsg ?
-                        <p className="warning-message">You're loving {restaurantToSave.name}! It's already in {newSlateName}! Add to a different slate?</p>
-                        : null
-                        } */}
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary outline-delete" onClick={(event) => handleSubmit(event)}>

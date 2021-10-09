@@ -15,13 +15,11 @@ import './SlateById.css'
 
 const SlateById = () => {
     const { id } = useParams();
-    // console.log('params slate id: ', id)
     const { loading, data } = useQuery(QUERY_SLATE, {
         variables: { id },
       });
     const returnedSlate = data?.slate || [];
     const restaurants = returnedSlate.restaurants;
-    // console.log("restaurants:", restaurants)
     const [showSlateModal, setShowSlateModal] = useState(false);
     const [updatedName, setUpdatedName] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -96,6 +94,8 @@ const SlateById = () => {
     </>
   }
 
+  console.log('restaurants:', restaurants)
+
   return (
     <main>
       <div className="slate-header">
@@ -106,17 +106,17 @@ const SlateById = () => {
           <>
           <Button
             className='btn-block btn outline-delete'
-            // onClick={() => handleDeleteSlate(returnedSlate._id)}
+            id="delete-slate-btn"
             onClick={()=>renderDeleteConfirmModal(returnedSlate._id)}
           >
-            <i class="fas fa-trash"></i>
+            <i className="fas fa-trash"></i>
           </Button>
           <Button
             className='btn-block btn outline-delete'
-            // onClick={() => handleEditSlate(returnedSlate._id)}
+            id="edit-slate-btn"
             onClick={(event) => handleEditClick(event)}
           >
-            <i class="fas fa-pen"></i>
+            <i className="fas fa-pen"></i>
           </Button>
           </>
           :
@@ -131,9 +131,21 @@ const SlateById = () => {
       </div>
       :
       null}
+      {/* {restaurants && restaurants === [] && restaurants.length ?
+        null
+      :
+        <>
+        <div className="no-restaurants-yet-div">
+          <h4>No restaurants have been added yet!</h4>
+        </div>
+        </>
+      } */}
       {restaurants ? 
         <RestaurantCards restaurants={restaurants} />
-        : null
+        : 
+      
+        null
+      
       }
       <Modal show={showSlateModal} onHide={() => handleClose()}>
           <Modal.Header closeButton onClick={()=>handleClose()}>

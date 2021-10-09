@@ -13,44 +13,8 @@ import './LoggedInHome.css';
 const LoggedInHome = (props) => {
   const { loading, data } = useQuery(QUERY_MY_RANDOM_RESTAURANT);
   const myRestaurant = data?.myRandomRestaurant || [];
-  // console.log("myRestaurant:", myRestaurant)
-  // const [category, setCategory] = useState("")
-  // const [mySuggestions, setMySuggestions] = useState([])
   const [mySuggestions, setMySuggestions] = useState([])
   const [apiSearch] = useMutation(API_SEARCH);
-
-  // const suggestionsResponse = useQuery(QUERY_SUGGESTIONS, { variables: { category: myRestaurant ? myRestaurant.category : "Mexican"}});
-  // const mySuggestions = suggestionsResponse.data?.suggestions || [];
-  // console.log("suggested restaurants:", mySuggestions)
-
-  // useEffect(()=>{
-  //   console.log("the component did mount")
-  //   if(myRestaurant){
-  //     setCategory(myRestaurant.category)
-  //   }
-  //   // myRestaurant ? setCategory(myRestaurant.category) : setCategory('trending')
-  //   // console.log("my category:", category)
-  // },[myRestaurant])
-  // console.log("my category:", category)
-
-  // useEffect(() => {
-
-  //   if(!category){
-  //     // window.location.reload()
-  //     setCategory("trending")
-  //     return
-  //   }
-
-  //   apiSearch({
-  //     variables: { 
-  //       searchInput: category || Auth.getProfile().data.zipcode, 
-  //       zipcode: Auth.getProfile().data.zipcode
-  //     }
-  //   }).then((apiResponse)=>{
-  //     console.log("apiREsponse:", apiResponse.data.apiSearch);
-  //     setMySuggestions(apiResponse.data.apiSearch)
-  //   }).catch(err => console.log(err))
-  // }, [category] );
 
   window.onload = async () => {
     await apiSearch({

@@ -265,3 +265,15 @@ export const QUERY_MY_FRIENDS = gql`
     }
   }
 `;
+
+export const QUERY_NON_FRIENDS = gql`
+  query nonFriends($friendNameArray: [String!]) {
+    nonFriends(friendNameArray: $friendNameArray) {
+        _id
+        username
+        email
+        avatar
+        zipcode
+    }
+  }
+`;
