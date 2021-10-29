@@ -146,8 +146,7 @@ _Slate View:_
 * Axios
 * Apollo Server Express
 * Express.js
-* MySQL
-* Sequelize
+* MongoDB
 * Bcrypt
 * Jsonwebtoken
 ## Next Steps
