@@ -4,14 +4,23 @@ volumes:
 services:
   web:
     build:
-      context: .
+      context: ./client
+      target: build
+    links:
+      - server
     ports:
       - "3000:3000"
+  server:
+    build:
+      context: ./server
+    ports:
       - "3001:3001"
     links:
       - mongodb
     environment:
+      NODE_ENV: development
       MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/
+      SECRET: secretasdfasiu
   mongodb:
     image: mongo:latest
     environment:
