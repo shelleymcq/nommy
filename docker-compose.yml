@@ -1,0 +1,24 @@
+version: "3.7"
+volumes:
+  mongodb_data_container:
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    links:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
