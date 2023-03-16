@@ -11,7 +11,6 @@ RUN npm run build
 
 RUN yq -iP '.proxy="http://server:3001"' package.json -o json
 
-ENV NODE_ENV production
 EXPOSE 3000
 CMD [ "npm", "run", "start" ]
 
