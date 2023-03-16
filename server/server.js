@@ -36,9 +36,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // WILDCARD ROUTE TO DIRECT TO HOMEPAGE
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+//app.get('*', (req, res) => {
+  //res.sendFile(path.join(__dirname, '../client/build/index.html'));
+//});
 
 // START APP LISTENING
 db.once('open', () => {
