@@ -4,7 +4,7 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink,
+  HttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import {BrowserRouter as Router, Route } from 'react-router-dom';
@@ -21,8 +21,8 @@ import SearchRestaurants from './pages/SearchRestaurants';
 import SlateById from './components/SlateById/SlateById';
 
 // CONSTRUCT OUR MAIN GRAPHQL API ENDPOINT
-const httpLink = createHttpLink({
-  uri: '/graphql',
+const httpLink = new HttpLink({
+  uri: window.__RUNTIME_CONFIG__.API_URL + '/graphql',
 });
 
 // CONSTRUCT REQUEST MIDDLEWARE THAT WILL ATTACH THE JWT TOKEN

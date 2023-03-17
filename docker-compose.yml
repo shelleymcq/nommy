@@ -5,27 +5,29 @@ services:
   web:
     build:
       context: ./client
-      target: build
+      dockerfile: Dockerfile.dev
     links:
       - server
     ports:
       - "3000:3000"
     volumes:
        - ./client/src:/app/src
+    environment:
+      API_URL: http://localhost:3001
   server:
     build:
       context: ./server
     command: ["npm", "run", "watch"]
     ports:
       - "3001:3001"
-    links:
-      - mongodb
     volumes:
        - ./server:/app/
+       - /app/node_modules
+    links:
+      - mongodb
     environment:
       NODE_ENV: development
       MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/
-      SECRET: secretasdfasiu
   mongodb:
     image: mongo:latest
     environment:
