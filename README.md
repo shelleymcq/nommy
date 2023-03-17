@@ -5,10 +5,11 @@ A place to save all your restaurant dining ideas and to get inspired.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
+* [Server Configuraiton](#ServerConfiguration)
+* [Client Configuraiton](#ClientConfiguration)
 * [Local Docker Stack](#LocalDockerStack)
 * [User Story](#UserStory)
-* [Installation](#Installation)
-* [Usage](#Usage)
+* [Local Installation](#Installation)
 * [Technologies](#Technologies)
 * [Next Steps](#Technologies)
 * [Contributors](#Contributors)
@@ -27,6 +28,9 @@ REACT_APP_APIKEY
 ## Client Configuration
 The client utilizes the package `runtime-env-cra` to load configuration from the process ENV at runtime.
 Defaults live in the `client/.env` file, and will be used if running with `NODE_ENV=development`
+
+### Required ENV
+API_URL
 
 ## Local Docker Stack
 The docker-compose stack will build and run all required services in development with live reloading enabled.
