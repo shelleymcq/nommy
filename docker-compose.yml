@@ -10,13 +10,18 @@ services:
       - server
     ports:
       - "3000:3000"
+    volumes:
+       - ./client/src:/app/src
   server:
     build:
       context: ./server
+    command: ["npm", "run", "watch"]
     ports:
       - "3001:3001"
     links:
       - mongodb
+    volumes:
+       - ./server:/app/
     environment:
       NODE_ENV: development
       MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/
