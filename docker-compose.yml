@@ -26,7 +26,6 @@ services:
     links:
       - mongodb
     environment:
-      NODE_ENV: development
       MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/
   mongodb:
     image: mongo:latest
