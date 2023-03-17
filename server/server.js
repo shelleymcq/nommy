@@ -30,16 +30,6 @@ server.applyMiddleware({ app });
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// SERVE UP STATIC ASSETS
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
-
-// WILDCARD ROUTE TO DIRECT TO HOMEPAGE
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
-
 // START APP LISTENING
 db.once('open', () => {
   app.listen(PORT, () => {

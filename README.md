@@ -5,14 +5,49 @@ A place to save all your restaurant dining ideas and to get inspired.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
+* [Server Configuraiton](#ServerConfiguration)
+* [Client Configuraiton](#ClientConfiguration)
+* [Local Docker Stack](#LocalDockerStack)
 * [User Story](#UserStory)
-* [Installation](#Installation)
-* [Usage](#Usage)
+* [Local Installation](#Installation)
 * [Technologies](#Technologies)
 * [Next Steps](#Technologies)
 * [Contributors](#Contributors)
 * [Contact](#Contact)
 * [Links](#Links)
+
+## Server Configuration
+The server utilized the dotenv package to load config from `server/.env`
+Configuration can be loaded from there, or the process ENV.
+
+### Required ENV
+REACT_APP_BASEURL
+REACT_APP_SEARCH
+REACT_APP_APIKEY
+
+## Client Configuration
+The client utilizes the package `runtime-env-cra` to load configuration from the process ENV at runtime.
+Defaults live in the `client/.env` file, and will be used if running with `NODE_ENV=development`
+
+### Required ENV
+API_URL
+
+## Local Docker Stack
+The docker-compose stack will build and run all required services in development with live reloading enabled.
+
+```shell
+# start stack in forground
+docker-compose up
+
+# start stack in background
+docker-compose up -d
+
+# stop stack
+docker-compose down
+
+# clean up
+docker-compose rm
+```
 
 ## User Story 
 * As a foodie 
@@ -80,15 +115,6 @@ Fork this repo and download the files to your local environment. Install the dep
    5. After download and installation is complete, restart your command-line terminal and redo step 1 to confirm a successful installation.
    6. After Node.js is on your local machine, return to the [installation](#installation) instructions for this project's application above.
 
-## Usage
-_If cloned down to your computer..._
-
-1. `Add an .env file with your MySQL username, database name, and MySQL password, gmail email address, and email password.`
-2. Navigate to the directory of the application in your terminal using `cd`, if not already there.
-3. If you haven't already, be sure you followed all [installation](#installation) installation instructions above.
-4. Seed your database in CLI using: `npm run seed`.
-5. Initialize the application in CLI using: `npm run develop`.
-6. The react application will automatically load when the server starts.
 
 _If accessing deployed Heroku application..._
 

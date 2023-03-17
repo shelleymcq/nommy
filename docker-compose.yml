@@ -4,10 +4,25 @@ volumes:
 services:
   web:
     build:
-      context: .
+      context: ./client
+      dockerfile: Dockerfile.dev
+    links:
+      - server
     ports:
       - "3000:3000"
+    volumes:
+       - ./client/src:/app/src
+    environment:
+      API_URL: http://localhost:3001
+  server:
+    build:
+      context: ./server
+    command: ["npm", "run", "watch"]
+    ports:
       - "3001:3001"
+    volumes:
+       - ./server:/app/
+       - /app/node_modules
     links:
       - mongodb
     environment:

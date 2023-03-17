@@ -1,0 +1,17 @@
+# development environment
+FROM node:16-alpine as build
+RUN apk add yq
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+COPY . .
+RUN npm run build
+
+# production environment
+FROM nginx:stable-alpine as production
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+
+CMD ["/bin/sh", "-c", "runtime-env-cra && nginx -g \"daemon off;\""]
