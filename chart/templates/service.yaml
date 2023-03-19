@@ -1,0 +1,19 @@
+{{- range list .Values.client .Values.server }}
+{{- $scope := dict "Values" . "Chart" $.Chart "Release" $.Release }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nommy.fullname" $scope }}
+  labels:
+    {{- include "nommy.labels" $ | nindent 4 }}
+spec:
+  type: {{ .service.type }}
+  ports:
+    - port: {{ .service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "nommy.selectorLabels" $scope | nindent 4 }}
+---
+{{- end }}

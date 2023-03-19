@@ -1,0 +1,65 @@
+{{- range list .Values.client .Values.server }}
+{{- $scope := dict "Values" . "Chart" $.Chart "Release" $.Release }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nommy.fullname" $scope }}
+  labels:
+    {{- include "nommy.labels" $scope| nindent 4 }}
+spec:
+  {{- if not .autoscaling.enabled }}
+  replicas: {{ .replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "nommy.selectorLabels" $scope | nindent 6 }}
+  template:
+    metadata:
+      {{- with .podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "nommy.selectorLabels" $scope | nindent 8 }}
+    spec:
+      {{- with .imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "nommy.serviceAccountName" $ }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "nommy.name" $scope }}
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          image: "{{ .image.repository }}:{{ .image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+      {{- with .nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+{{- end }}
