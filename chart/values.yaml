@@ -12,10 +12,9 @@ serviceAccount:
 
 deploymentDefaults: &deploymentDefaults
   image:
-    repository: nginx
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: latest
   imagePullSecrets: []
   podAnnotations: {}
   podSecurityContext: {}
@@ -49,7 +48,7 @@ client:
   <<: *deploymentDefaults
   replicaCount: 1
   image:
-    repository: nginx
+    repository: nommy/web
 
   env:
     - name: foo
@@ -80,7 +79,7 @@ server:
   nameOverride: nommy-server
   replicaCount: 1
   image:
-    repository: nginx
+    repository: nommy/server
 
   service:
     type: ClusterIP
