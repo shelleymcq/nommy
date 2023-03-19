@@ -1,5 +1,6 @@
 {{- range list .Values.client .Values.server }}
 {{- $scope := dict "Values" . "Chart" $.Chart "Release" $.Release }}
+{{- $mongo_scope := dict "Values" $.Values.mongodb "Chart" $.Chart "Release" $.Release }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -48,7 +49,21 @@ spec:
               path: /
               port: http
           env:
+            {{- if .env }}
             {{- toYaml .env | nindent 12 }}
+            {{- end }}
+            - name: API_URL
+              {{- $protocol := ternary "https" "http" (gt (len $.Values.server.ingress.tls) 0) }}
+              value: {{ $protocol }}://{{ get ($.Values.server.ingress.hosts | first) "host" }}
+            - name: MONGODB_USER
+              value: root
+            - name: MONGODB_HOST
+              value: {{ include "mongodb.fullname" $mongo_scope }}
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mongodb.secretName" $mongo_scope }}
+                  key: mongodb-root-password
           resources:
             {{- toYaml .resources | nindent 12 }}
       {{- with .nodeSelector }}
