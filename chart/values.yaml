@@ -87,6 +87,15 @@ server:
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
+  env:
+    - name: MONGODB_ROOT_USER
+      value: {{ .Values.auth.rootUser | quote }}
+    - name: MONGODB_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: {{ include "mongodb.secretName" . }}
+          key: mongodb-root-password
+
   imagePullSecrets: []
 
   serviceAccount:

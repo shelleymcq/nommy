@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/chart/charts
 /.pnp
 .pnp.js
 
