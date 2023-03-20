@@ -24,6 +24,7 @@ Configuration can be loaded from there, or the process ENV.
 REACT_APP_BASEURL
 REACT_APP_SEARCH
 REACT_APP_APIKEY
+SECRET
 
 ## Client Configuration
 The client utilizes the package `runtime-env-cra` to load configuration from the process ENV at runtime.
@@ -47,6 +48,33 @@ docker-compose down
 
 # clean up
 docker-compose rm
+```
+
+## Publishing a new version of the application
+```shell
+# build all required docker containers
+make build
+
+# push them to the remote repo
+make push
+```
+
+## Deploy to a K8s cluster with helm
+1. Create a new values file for specific configuration for your release.
+
+1. Ensure you are connected to the desired k8s cluster and namespace
+```shell
+kubectx
+kubens
+```
+
+1. Deploy the chart
+```shell
+cd chart
+# install
+helm install <release-name> ./ -f <values-file>
+# upgrade
+helm upgrade <release-name> ./ -f <values-file>
 ```
 
 ## User Story 
