@@ -11,7 +11,16 @@ RUN npm run build
 
 # production environment
 FROM nginx:stable-alpine as production
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=build /app/.env /usr/share/nginx/html/.env
 COPY --from=build /app/build /usr/share/nginx/html
+
+RUN apk add --update nodejs
+RUN apk add --update npm
+RUN npm install -g runtime-env-cra@0.2.4
+
 EXPOSE 80
 
 CMD ["/bin/sh", "-c", "runtime-env-cra && nginx -g \"daemon off;\""]
