@@ -1,0 +1,32 @@
+{{- range list .Values.client .Values.server }}
+{{- $scope := dict "Values" . "Chart" $.Chart "Release" $.Release }}
+{{- if .autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "nommy.fullname" $scope }}
+  labels:
+    {{- include "nommy.labels" $scope | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "nommy.fullname" $scope }}
+  minReplicas: {{ .autoscaling.minReplicas }}
+  maxReplicas: {{ .autoscaling.maxReplicas }}
+  metrics:
+    {{- if .autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}
+---
+{{- end }}
